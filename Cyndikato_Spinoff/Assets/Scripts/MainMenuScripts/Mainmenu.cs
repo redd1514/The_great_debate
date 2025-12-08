@@ -256,9 +256,10 @@ public class Mainmenu : MonoBehaviour
         // Load character select scene using SceneFlowManager for smooth transition
         if (!string.IsNullOrEmpty(characterSelectSceneName))
         {
-            if (SceneFlowManager.Instance != null)
+            SceneFlowManager manager = SceneFlowManager.Instance;
+            if (manager != null)
             {
-                SceneFlowManager.Instance.LoadCharacterSelect();
+                manager.LoadCharacterSelect();
             }
             else
             {

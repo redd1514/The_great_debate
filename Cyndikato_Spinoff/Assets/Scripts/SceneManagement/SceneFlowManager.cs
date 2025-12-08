@@ -133,13 +133,27 @@ public class SceneFlowManager : MonoBehaviour
         Debug.Log($"Starting scene transition to {targetSceneName}");
 
         // First, load the loading scene
-        yield return SceneManager.LoadSceneAsync(loadingSceneName);
+        AsyncOperation loadingSceneOp = SceneManager.LoadSceneAsync(loadingSceneName);
+        if (loadingSceneOp == null)
+        {
+            Debug.LogError($"Failed to start loading scene: {loadingSceneName}");
+            isLoading = false;
+            yield break;
+        }
+        yield return loadingSceneOp;
 
         // Give LoadingScreenController a frame to initialize
         yield return null;
 
         // Start loading the target scene in the background
         currentLoadOperation = SceneManager.LoadSceneAsync(targetSceneName);
+        if (currentLoadOperation == null)
+        {
+            Debug.LogError($"Failed to start loading target scene: {targetSceneName}");
+            isLoading = false;
+            yield break;
+        }
+        
         currentLoadOperation.allowSceneActivation = false; // Don't activate immediately
 
         // Wait for the scene to load

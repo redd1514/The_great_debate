@@ -32,6 +32,8 @@ public class LoadingScreenController : MonoBehaviour
 
     void Start()
     {
+        ValidateUIReferences();
+        
         // Initialize UI
         if (progressBar != null)
         {
@@ -41,13 +43,30 @@ public class LoadingScreenController : MonoBehaviour
         UpdateLoadingText();
         StartCoroutine(AnimateLoading());
     }
+    
+    private void ValidateUIReferences()
+    {
+        if (progressBar == null)
+        {
+            Debug.LogWarning("LoadingScreenController: Progress Bar reference is not assigned!");
+        }
+        if (loadingText == null)
+        {
+            Debug.LogWarning("LoadingScreenController: Loading Text reference is not assigned!");
+        }
+        if (percentageText == null)
+        {
+            Debug.LogWarning("LoadingScreenController: Percentage Text reference is not assigned!");
+        }
+    }
 
     void Update()
     {
         // Get actual loading progress from SceneFlowManager
-        if (SceneFlowManager.Instance != null && SceneFlowManager.Instance.IsLoading())
+        SceneFlowManager manager = SceneFlowManager.Instance;
+        if (manager != null && manager.IsLoading())
         {
-            float actualProgress = SceneFlowManager.Instance.GetLoadingProgress();
+            float actualProgress = manager.GetLoadingProgress();
             targetProgress = actualProgress;
         }
 

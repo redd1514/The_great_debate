@@ -126,17 +126,21 @@ public class IntroSceneController : MonoBehaviour
             return true;
         }
 
-        // Controller input - check various common buttons
-        // X button (PS4/Xbox)
-        if (Input.GetKeyDown("joystick 1 button 0") || 
-            Input.GetKeyDown("joystick 1 button 1"))
+        // Controller input - using hardcoded button strings for consistency with existing codebase
+        // Note: This matches the input style used in Mainmenu.cs
+        // For better cross-platform support, consider migrating to Unity's Input System
+        string joystickName = "joystick 1";
+        
+        // X button (PS4/Xbox) - button 0 is typically the south button
+        if (Input.GetKeyDown($"{joystickName} button 0") || 
+            Input.GetKeyDown($"{joystickName} button 1"))
         {
             return true;
         }
 
         // Start button
-        if (Input.GetKeyDown("joystick 1 button 7") || 
-            Input.GetKeyDown("joystick 1 button 9"))
+        if (Input.GetKeyDown($"{joystickName} button 7") || 
+            Input.GetKeyDown($"{joystickName} button 9"))
         {
             return true;
         }
