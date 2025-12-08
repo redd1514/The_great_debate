@@ -213,13 +213,21 @@ public class MapSelectionController : MonoBehaviour
         if (deviceName == "Keyboard")
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
                 input.x = -1;
+            }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
                 input.x = 1;
+            }
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
                 input.y = 1;
+            }
             else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
                 input.y = -1;
+            }
         }
         else if (deviceName.StartsWith("Controller"))
         {
@@ -229,13 +237,21 @@ public class MapSelectionController : MonoBehaviour
                 
                 // D-pad buttons
                 if (Input.GetKeyDown($"{joystickName} button 13")) // D-pad left
+                {
                     input.x = -1;
+                }
                 else if (Input.GetKeyDown($"{joystickName} button 14")) // D-pad right
+                {
                     input.x = 1;
+                }
                 if (Input.GetKeyDown($"{joystickName} button 11")) // D-pad up
+                {
                     input.y = 1;
+                }
                 else if (Input.GetKeyDown($"{joystickName} button 12")) // D-pad down
+                {
                     input.y = -1;
+                }
             }
         }
         

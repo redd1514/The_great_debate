@@ -89,30 +89,29 @@ public class MapVisualIndicator : MonoBehaviour
             // Cycle through player colors if multiple players voted
             foreach (Color playerColor in activePlayerColors)
             {
-                // Fade in gradient from bottom to top
+                // Fade in gradient from bottom to top with blinking effect
                 float elapsed = 0f;
                 while (elapsed < blinkSpeed)
                 {
                     elapsed += Time.deltaTime;
                     float t = elapsed / blinkSpeed;
                     
-                    // Set gradient color with alpha animation
-                    Color topColor = playerColor;
-                    topColor.a = Mathf.Lerp(0.3f, 0.7f, Mathf.PingPong(t * 2, 1));
+                    // Create blinking effect with alpha animation
+                    float alpha = Mathf.Lerp(0.4f, 0.9f, Mathf.PingPong(t * 2, 1));
                     
-                    Color bottomColor = playerColor;
-                    bottomColor.a = Mathf.Lerp(0.6f, 1.0f, Mathf.PingPong(t * 2, 1));
+                    // Apply color with animated alpha
+                    Color blinkColor = playerColor;
+                    blinkColor.a = alpha;
                     
-                    // Update gradient using vertical gradient
-                    if (gradientMaterial != null)
-                    {
-                        gradientOverlay.color = bottomColor;
-                    }
+                    // Update the overlay color to create the blink effect
+                    // Note: For true gradient effect, use a UI shader with gradient properties
+                    // or a shader that supports vertical color gradients
+                    gradientOverlay.color = blinkColor;
                     
                     yield return null;
                 }
                 
-                // If only one player, stay with their color
+                // If only one player, pause briefly before repeating
                 if (activePlayerColors.Count == 1)
                 {
                     yield return new WaitForSeconds(blinkSpeed * 0.5f);
