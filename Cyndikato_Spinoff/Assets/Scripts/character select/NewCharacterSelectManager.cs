@@ -485,28 +485,23 @@ public class NewCharacterSelectManager : MonoBehaviour
 
     void JoinPlayerWithDevice(int playerIndex, InputDevice device)
     {
-        if (playerIndex >= 0 && playerIndex < maxPlayers && !players[playerIndex].isJoined)
-        {
-            players[playerIndex].isJoined = true;
-            players[playerIndex].selectedCharacterIndex = 0; // Start at first character
-            usedDevices.Add(device);
-            deviceToPlayerMap[device] = playerIndex;
-            
-            // Don't automatically switch active player - let players control independently
-            if (currentActivePlayer == -1 || !players[currentActivePlayer].isJoined)
-                currentActivePlayer = playerIndex;
-                
-            // Initialize character grid for this player
-            if (characterGrid != null)
-            {
-                characterGrid.InitializePlayerSelection(playerIndex, playerSelectionColors[playerIndex]);
-            }
-            
-            UpdateUI();
+        if (players[playerIndex].isJoined) return;
 
-            string deviceName = device == InputDevice.Keyboard ? "Keyboard" : $"Controller {(int)device}";
-            Debug.Log($"Player {playerIndex + 1} joined with {deviceName} - Selection Color: {playerSelectionColors[playerIndex].ToString()}");
-        }
+        players[playerIndex].isJoined = true;
+        players[playerIndex].inputDeviceName = device.ToString(); // Fix: Use ToString() instead of .name
+        players[playerIndex].inputDeviceId = (int)device; // Fix: Cast enum to int instead of .deviceId
+
+        // Add device mapping
+        deviceToPlayerMap[device] = playerIndex;
+        usedDevices.Add(device);
+
+        // Set player color based on index
+        Color[] playerColors = { Color.red, Color.blue, Color.green, Color.yellow };
+        players[playerIndex].playerColor = playerColors[playerIndex % playerColors.Length];
+
+        Debug.Log($"Player {playerIndex + 1} joined with device: {device.ToString()} (Color: {players[playerIndex].playerColor})");
+
+        UpdateUI();
     }
 
     void InitializePlayers()

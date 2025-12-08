@@ -19,8 +19,5 @@ public class CharacterSelectData : ScriptableObject
     [Header("Game Assets")]
     public GameObject characterPrefab;  // For spawning in game scene
 
-    [Header("Character Stats (Optional)")]
-    public int health = 100;
-    public int speed = 5;
-    public int attack = 10;
+    
 }

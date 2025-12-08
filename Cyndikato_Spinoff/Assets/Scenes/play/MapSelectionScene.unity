@@ -392,6 +392,51 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &1184740549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184740551}
+  - component: {fileID: 1184740550}
+  m_Layer: 0
+  m_Name: MapSelectionInputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1184740550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184740549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d9b07fb6a9f704094eebba4254c203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapSelectInputManager
+  navigationDelay: 0.2
+--- !u!4 &1184740551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184740549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 541.60535, y: 252.20961, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200281037
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,50 +1039,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1 &1795509942
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1795509944}
-  - component: {fileID: 1795509943}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1795509943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795509942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69dfb15d062037346a213d24a4be41c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapSelectionDebugHelper
---- !u!4 &1795509944
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795509942}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 541.60535, y: 252.20961, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075179737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,13 +1192,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d5709d5c4bb10bf409f87e96f74e9655, type: 2}
   - {fileID: 11400000, guid: 212d3cdb3cb8c8b4a8c5b8238788e1c8, type: 2}
   - {fileID: 11400000, guid: cc4746041c738994ca905d78c39d2726, type: 2}
-  useRandomMapSelection: 1
-  randomSelectionDelay: 2.5
-  loadingScreenDuration: 3
+  votingDuration: 15
+  resultDisplayDuration: 3
   mapGridParent: {fileID: 1234980691}
   mapIconPrefab: {fileID: 6502516776135303671, guid: 7b3c972810668ee4db467591c13e66d4, type: 3}
   timerText: {fileID: 1545381455}
   statusText: {fileID: 0}
+  instructionText: {fileID: 0}
+  mapsPerRow: 2
+  mapIconSize: {x: 200, y: 200}
+  mapIconSpacing: {x: 220, y: 220}
   gameplaySceneName: GameplayScene
   mapSceneNames:
   - Map1
@@ -1206,6 +1210,7 @@ MonoBehaviour:
   - Map4
   mainCanvas: {fileID: 1403519889}
   uiContainer: {fileID: 2075179738}
+  enableDebugLogging: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1214,4 +1219,4 @@ SceneRoots:
   - {fileID: 1403519886}
   - {fileID: 1391907171}
   - {fileID: 2135366067}
-  - {fileID: 1795509944}
+  - {fileID: 1184740551}
