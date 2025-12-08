@@ -35,6 +35,8 @@ public class MapVotingManager : MonoBehaviour
     [Range(5f, 60f)]
     public float votingDuration = 15f;
     public bool allowVoteChanges = true;
+    [Tooltip("If true, automatically end voting when all players have voted")]
+    public bool autoCompleteWhenAllVoted = false;
     
     [Header("Scene Settings")]
     public string gameplaySceneName = "GameplayScene";
@@ -309,11 +311,8 @@ public class MapVotingManager : MonoBehaviour
             SubmitPlayerVote(playerIndex);
         }
         
-        // Allow early skip with special input combination (all players press submit together)
-        if (GetSubmitInput(device) && Input.GetKey(KeyCode.LeftShift))
-        {
-            votingTimer = Mathf.Min(votingTimer, 1f); // Skip to end
-        }
+        // Note: Early skip can be implemented by checking if all players have voted
+        // This is a more intuitive approach than requiring special input combinations
     }
     
     void HandlePlayerNavigation(int playerIndex, Vector2 input)
@@ -473,7 +472,13 @@ public class MapVotingManager : MonoBehaviour
         if (AllPlayersVoted())
         {
             Debug.Log("MapVotingManager: All players have voted!");
-            // Could end early here if desired
+            
+            // Auto-complete voting if enabled
+            if (autoCompleteWhenAllVoted)
+            {
+                Debug.Log("MapVotingManager: Auto-completing voting (all players voted)");
+                votingTimer = Mathf.Min(votingTimer, 2f); // Give 2 seconds to see results
+            }
         }
     }
     
@@ -678,11 +683,12 @@ public class MapVotingManager : MonoBehaviour
     {
         string joystickName = $"joystick {controllerIndex + 1}";
         
-        // D-pad buttons
-        if (Input.GetKeyDown($"{joystickName} button 13")) return Vector2.left;
-        if (Input.GetKeyDown($"{joystickName} button 14")) return Vector2.right;
-        if (Input.GetKeyDown($"{joystickName} button 11")) return Vector2.up;
-        if (Input.GetKeyDown($"{joystickName} button 12")) return Vector2.down;
+        // D-pad buttons (Xbox controller standard mapping)
+        // Note: These may vary by controller type. For production, consider using Unity's new Input System
+        if (Input.GetKeyDown($"{joystickName} button 13")) return Vector2.left;   // D-pad left
+        if (Input.GetKeyDown($"{joystickName} button 14")) return Vector2.right;  // D-pad right
+        if (Input.GetKeyDown($"{joystickName} button 11")) return Vector2.up;     // D-pad up
+        if (Input.GetKeyDown($"{joystickName} button 12")) return Vector2.down;   // D-pad down
         
         return Vector2.zero;
     }
@@ -707,7 +713,9 @@ public class MapVotingManager : MonoBehaviour
     bool GetControllerSubmit(int controllerIndex)
     {
         string joystickName = $"joystick {controllerIndex + 1}";
-        return Input.GetKeyDown($"{joystickName} button 0"); // A button
+        // A button (Xbox) / Cross button (PlayStation) - Standard button 0
+        // Note: For production, consider using Unity's new Input System for better cross-platform support
+        return Input.GetKeyDown($"{joystickName} button 0");
     }
     
     void CreateTestMaps()
