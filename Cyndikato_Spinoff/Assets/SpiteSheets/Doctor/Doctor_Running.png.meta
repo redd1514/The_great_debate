@@ -1,0 +1,1222 @@
+fileFormatVersion: 2
+guid: efbabf19e3b2b42479d0df870dbe7fa5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4013962592808736913
+    second: Doctor_Running_0
+  - first:
+      213: -795729947339550549
+    second: Doctor_Running_1
+  - first:
+      213: -3057821978920122835
+    second: Doctor_Running_2
+  - first:
+      213: 4313776798181134774
+    second: Doctor_Running_3
+  - first:
+      213: 1404121985669195196
+    second: Doctor_Running_4
+  - first:
+      213: 5907933967012010331
+    second: Doctor_Running_5
+  - first:
+      213: 8188962990117052703
+    second: Doctor_Running_6
+  - first:
+      213: -3911299180522709659
+    second: Doctor_Running_7
+  - first:
+      213: -8712394949504902741
+    second: Doctor_Running_8
+  - first:
+      213: 1321072936948310151
+    second: Doctor_Running_9
+  - first:
+      213: -1313621248594843282
+    second: Doctor_Running_10
+  - first:
+      213: 1689395325909750967
+    second: Doctor_Running_11
+  - first:
+      213: -5922829151314305467
+    second: Doctor_Running_12
+  - first:
+      213: -4526691698255665656
+    second: Doctor_Running_13
+  - first:
+      213: -4929496522345946964
+    second: Doctor_Running_14
+  - first:
+      213: 5609738720391782873
+    second: Doctor_Running_15
+  - first:
+      213: 9076209189992936048
+    second: Doctor_Running_16
+  - first:
+      213: -8119253963624298314
+    second: Doctor_Running_17
+  - first:
+      213: -6837722753444383729
+    second: Doctor_Running_18
+  - first:
+      213: 800793628244883493
+    second: Doctor_Running_19
+  - first:
+      213: -7060143509782615537
+    second: Doctor_Running_20
+  - first:
+      213: -1865882436779602251
+    second: Doctor_Running_21
+  - first:
+      213: 6465667626804945296
+    second: Doctor_Running_22
+  - first:
+      213: -3396483664011425613
+    second: Doctor_Running_23
+  - first:
+      213: -7362856545359780490
+    second: Doctor_Running_24
+  - first:
+      213: -6602546938935687163
+    second: Doctor_Running_25
+  - first:
+      213: 1649713193267986914
+    second: Doctor_Running_26
+  - first:
+      213: 8177209189344133515
+    second: Doctor_Running_27
+  - first:
+      213: 4547292394177234775
+    second: Doctor_Running_28
+  - first:
+      213: 3827130312746240982
+    second: Doctor_Running_29
+  - first:
+      213: -400326922957869164
+    second: Doctor_Running_30
+  - first:
+      213: -1586700484365816859
+    second: Doctor_Running_31
+  - first:
+      213: 6218607077024601315
+    second: Doctor_Running_32
+  - first:
+      213: 3832769029293887511
+    second: Doctor_Running_33
+  - first:
+      213: 4796239880563294139
+    second: Doctor_Running_34
+  - first:
+      213: -4865097807311368750
+    second: Doctor_Running_35
+  - first:
+      213: -5300963225312323324
+    second: Doctor_Running_36
+  - first:
+      213: -8766434721916390649
+    second: Doctor_Running_37
+  - first:
+      213: -4830054583023147131
+    second: Doctor_Running_38
+  - first:
+      213: 827854325803629022
+    second: Doctor_Running_39
+  - first:
+      213: 7354943667993583034
+    second: Doctor_Running_40
+  - first:
+      213: -4046050362701721529
+    second: Doctor_Running_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Doctor_Running_0
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 52
+        width: 322
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 198121616b574b730800000000000000
+      internalID: 4013962592808736913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_1
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 52
+        width: 322
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba09faf24dff4f4f0800000000000000
+      internalID: -795729947339550549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_2
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 52
+        width: 322
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2685187c1f6095d0800000000000000
+      internalID: -3057821978920122835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_3
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 51
+        width: 327
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b198ef742d9ddb30800000000000000
+      internalID: 4313776798181134774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_4
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 54
+        width: 323
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb5e021b1817c7310800000000000000
+      internalID: 1404121985669195196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_5
+      rect:
+        serializedVersion: 2
+        x: 2046
+        y: 54
+        width: 323
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59173434a23df150800000000000000
+      internalID: 5907933967012010331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_6
+      rect:
+        serializedVersion: 2
+        x: 2452
+        y: 54
+        width: 323
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f116fb8d37a05a170800000000000000
+      internalID: 8188962990117052703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_7
+      rect:
+        serializedVersion: 2
+        x: 2845
+        y: 52
+        width: 303
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ddaa64e1648b9c0800000000000000
+      internalID: -3911299180522709659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_8
+      rect:
+        serializedVersion: 2
+        x: 3260
+        y: 52
+        width: 303
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba95ad324fa571780800000000000000
+      internalID: -8712394949504902741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_9
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 53
+        width: 256
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 780af2936d4655210800000000000000
+      internalID: 1321072936948310151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_10
+      rect:
+        serializedVersion: 2
+        x: 4108
+        y: 53
+        width: 256
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e69691c2f6415cde0800000000000000
+      internalID: -1313621248594843282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_11
+      rect:
+        serializedVersion: 2
+        x: 4496
+        y: 55
+        width: 256
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b45e0e1910f17710800000000000000
+      internalID: 1689395325909750967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_12
+      rect:
+        serializedVersion: 2
+        x: 4904
+        y: 46
+        width: 256
+        height: 249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54e15927442edcda0800000000000000
+      internalID: -5922829151314305467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_13
+      rect:
+        serializedVersion: 2
+        x: 5304
+        y: 48
+        width: 256
+        height: 247
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806e2c542e5fd21c0800000000000000
+      internalID: -4526691698255665656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_14
+      rect:
+        serializedVersion: 2
+        x: 5697
+        y: 47
+        width: 257
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca0eb00d709e69bb0800000000000000
+      internalID: -4929496522345946964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_15
+      rect:
+        serializedVersion: 2
+        x: 6094
+        y: 47
+        width: 286
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 2, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d1e4bff4abc9dd40800000000000000
+      internalID: 5609738720391782873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_16
+      rect:
+        serializedVersion: 2
+        x: 6489
+        y: 50
+        width: 286
+        height: 257
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0723aa4ab2c25fd70800000000000000
+      internalID: 9076209189992936048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_17
+      rect:
+        serializedVersion: 2
+        x: 6886
+        y: 47
+        width: 286
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 4, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b8cdf8a98d925f80800000000000000
+      internalID: -8119253963624298314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_18
+      rect:
+        serializedVersion: 2
+        x: 7259
+        y: 80
+        width: 313
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04775032678b11a0800000000000000
+      internalID: -6837722753444383729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_19
+      rect:
+        serializedVersion: 2
+        x: 7663
+        y: 80
+        width: 313
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 528bee5ef8dfc1b00800000000000000
+      internalID: 800793628244883493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_20
+      rect:
+        serializedVersion: 2
+        x: 8063
+        y: 81
+        width: 313
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0aa02452e4550e90800000000000000
+      internalID: -7060143509782615537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_21
+      rect:
+        serializedVersion: 2
+        x: 8469
+        y: 80
+        width: 313
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be8c134fcd0b16e0800000000000000
+      internalID: -1865882436779602251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_22
+      rect:
+        serializedVersion: 2
+        x: 8866
+        y: 78
+        width: 304
+        height: 235
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 091a373337aaab950800000000000000
+      internalID: 6465667626804945296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_23
+      rect:
+        serializedVersion: 2
+        x: 9266
+        y: 79
+        width: 304
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b88e295a144dd0d0800000000000000
+      internalID: -3396483664011425613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_24
+      rect:
+        serializedVersion: 2
+        x: 9711
+        y: 48
+        width: 254
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675aba96bf0e1d990800000000000000
+      internalID: -7362856545359780490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_25
+      rect:
+        serializedVersion: 2
+        x: 10069
+        y: 48
+        width: 254
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50845e37a8a0f54a0800000000000000
+      internalID: -6602546938935687163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_26
+      rect:
+        serializedVersion: 2
+        x: 10508
+        y: 48
+        width: 254
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e18302a865f4e610800000000000000
+      internalID: 1649713193267986914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_27
+      rect:
+        serializedVersion: 2
+        x: 10925
+        y: 46
+        width: 249
+        height: 257
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81cae8de684b7170800000000000000
+      internalID: 8177209189344133515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_28
+      rect:
+        serializedVersion: 2
+        x: 11292
+        y: 46
+        width: 249
+        height: 257
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75705c4075a3b1f30800000000000000
+      internalID: 4547292394177234775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_29
+      rect:
+        serializedVersion: 2
+        x: 11686
+        y: 49
+        width: 262
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6db8e501eb2bc1530800000000000000
+      internalID: 3827130312746240982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_30
+      rect:
+        serializedVersion: 2
+        x: 12093
+        y: 49
+        width: 262
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f221bd8c0c17af0800000000000000
+      internalID: -400326922957869164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_31
+      rect:
+        serializedVersion: 2
+        x: 12488
+        y: 49
+        width: 262
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb6f60f058eaf9e0800000000000000
+      internalID: -1586700484365816859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_32
+      rect:
+        serializedVersion: 2
+        x: 12885
+        y: 49
+        width: 262
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e418cf503eec4650800000000000000
+      internalID: 6218607077024601315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_33
+      rect:
+        serializedVersion: 2
+        x: 13250
+        y: 48
+        width: 318
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7105e21102bb03530800000000000000
+      internalID: 3832769029293887511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_34
+      rect:
+        serializedVersion: 2
+        x: 13651
+        y: 48
+        width: 318
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbf798282caaf8240800000000000000
+      internalID: 4796239880563294139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_35
+      rect:
+        serializedVersion: 2
+        x: 14050
+        y: 48
+        width: 318
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd8ca51253bb7cb0800000000000000
+      internalID: -4865097807311368750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_36
+      rect:
+        serializedVersion: 2
+        x: 14452
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40999d348023f66b0800000000000000
+      internalID: -5300963225312323324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_37
+      rect:
+        serializedVersion: 2
+        x: 14862
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703f585211e575680800000000000000
+      internalID: -8766434721916390649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_38
+      rect:
+        serializedVersion: 2
+        x: 15263
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587682d82f238fcb0800000000000000
+      internalID: -4830054583023147131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_39
+      rect:
+        serializedVersion: 2
+        x: 15657
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9bb478f112d7b00800000000000000
+      internalID: 827854325803629022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_40
+      rect:
+        serializedVersion: 2
+        x: 16052
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abd14c14c42021660800000000000000
+      internalID: 7354943667993583034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Running_41
+      rect:
+        serializedVersion: 2
+        x: 16461
+        y: 49
+        width: 318
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 740d2dbc1aa89d7c0800000000000000
+      internalID: -4046050362701721529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 116dafd2861fd88468359a4d93fba4c8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Doctor_Running_0: 4013962592808736913
+      Doctor_Running_1: -795729947339550549
+      Doctor_Running_10: -1313621248594843282
+      Doctor_Running_11: 1689395325909750967
+      Doctor_Running_12: -5922829151314305467
+      Doctor_Running_13: -4526691698255665656
+      Doctor_Running_14: -4929496522345946964
+      Doctor_Running_15: 5609738720391782873
+      Doctor_Running_16: 9076209189992936048
+      Doctor_Running_17: -8119253963624298314
+      Doctor_Running_18: -6837722753444383729
+      Doctor_Running_19: 800793628244883493
+      Doctor_Running_2: -3057821978920122835
+      Doctor_Running_20: -7060143509782615537
+      Doctor_Running_21: -1865882436779602251
+      Doctor_Running_22: 6465667626804945296
+      Doctor_Running_23: -3396483664011425613
+      Doctor_Running_24: -7362856545359780490
+      Doctor_Running_25: -6602546938935687163
+      Doctor_Running_26: 1649713193267986914
+      Doctor_Running_27: 8177209189344133515
+      Doctor_Running_28: 4547292394177234775
+      Doctor_Running_29: 3827130312746240982
+      Doctor_Running_3: 4313776798181134774
+      Doctor_Running_30: -400326922957869164
+      Doctor_Running_31: -1586700484365816859
+      Doctor_Running_32: 6218607077024601315
+      Doctor_Running_33: 3832769029293887511
+      Doctor_Running_34: 4796239880563294139
+      Doctor_Running_35: -4865097807311368750
+      Doctor_Running_36: -5300963225312323324
+      Doctor_Running_37: -8766434721916390649
+      Doctor_Running_38: -4830054583023147131
+      Doctor_Running_39: 827854325803629022
+      Doctor_Running_4: 1404121985669195196
+      Doctor_Running_40: 7354943667993583034
+      Doctor_Running_41: -4046050362701721529
+      Doctor_Running_5: 5907933967012010331
+      Doctor_Running_6: 8188962990117052703
+      Doctor_Running_7: -3911299180522709659
+      Doctor_Running_8: -8712394949504902741
+      Doctor_Running_9: 1321072936948310151
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

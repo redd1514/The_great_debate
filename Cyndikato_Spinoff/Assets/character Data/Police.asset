@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95a1bb9a81edcc4ebe3e5d56dc983f4, type: 3}
+  m_Name: Police
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectData
+  characterName: Police
+  characterDescription: 
+  characterIcon: {fileID: 439156035149435037, guid: c6cbb1dbb41051640b25d105536e915a, type: 3}
+  characterFullArt: {fileID: -8524960177539778876, guid: 1ae89c4010e258b4997e9352a9d001e0, type: 3}
+  idleAnimationFrames:
+  - {fileID: 8414587910850223613, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: 4251670749432742623, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: 3813699670374938126, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: -3136198160693502230, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: 2405060493771111413, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: -2276702274234406390, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: -3424913918697794302, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: -2609309081791899822, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  - {fileID: -4824231166236643562, guid: 420202a16b9c674479fc20ec8915583a, type: 3}
+  animationSpeed: 0.1
+  loopAnimation: 1
+  characterPrefab: {fileID: 0}
+  health: 100
+  speed: 5
+  attack: 10

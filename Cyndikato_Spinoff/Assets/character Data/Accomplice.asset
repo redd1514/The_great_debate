@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95a1bb9a81edcc4ebe3e5d56dc983f4, type: 3}
+  m_Name: Accomplice
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectData
+  characterName: Accomplice
+  characterDescription: 
+  characterIcon: {fileID: 3452926827582415342, guid: 459b08a5bc116194e967ea5fc1052c8e, type: 3}
+  characterFullArt: {fileID: -8135847849157995755, guid: dae1acf17430d0d469aa8ea20c9a93cf, type: 3}
+  idleAnimationFrames:
+  - {fileID: 1114048720387886315, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: -7473842799441029621, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: -5519518886800980181, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: -7168345002452049249, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: 1453782786913161533, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: 8934419912273741914, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: 1459441294308915488, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: 3926957289227274159, guid: e4293801836274440a03af796b579bee, type: 3}
+  - {fileID: -5412903571011601645, guid: e4293801836274440a03af796b579bee, type: 3}
+  animationSpeed: 0.1
+  loopAnimation: 1
+  characterPrefab: {fileID: 0}
+  health: 100
+  speed: 5
+  attack: 10

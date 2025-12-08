@@ -1,0 +1,511 @@
+fileFormatVersion: 2
+guid: af802ddea24411945a804397ab22559f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5802770478068860369
+    second: Doctor_Heavy-Attack_0
+  - first:
+      213: -6488379525040457787
+    second: Doctor_Heavy-Attack_1
+  - first:
+      213: -5138260755953000283
+    second: Doctor_Heavy-Attack_2
+  - first:
+      213: -7541824050515027680
+    second: Doctor_Heavy-Attack_3
+  - first:
+      213: -1573081673050633919
+    second: Doctor_Heavy-Attack_4
+  - first:
+      213: 6240363534397103458
+    second: Doctor_Heavy-Attack_5
+  - first:
+      213: 3872437286860238037
+    second: Doctor_Heavy-Attack_6
+  - first:
+      213: 3114924714115589971
+    second: Doctor_Heavy-Attack_7
+  - first:
+      213: 5056368852107033768
+    second: Doctor_Heavy-Attack_8
+  - first:
+      213: -4870561461329434729
+    second: Doctor_Heavy-Attack_9
+  - first:
+      213: -7536173206459966649
+    second: Doctor_Heavy-Attack_10
+  - first:
+      213: -4213635949087973479
+    second: Doctor_Heavy-Attack_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 47
+        width: 270
+        height: 226
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d50b626105978050800000000000000
+      internalID: 5802770478068860369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_1
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 46
+        width: 249
+        height: 315
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c7bb0ae235a4f5a0800000000000000
+      internalID: -6488379525040457787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_2
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 46
+        width: 249
+        height: 339
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 11, y: 0, z: 14, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a0671ee01b31b8b0800000000000000
+      internalID: -5138260755953000283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 74
+        width: 196
+        height: 364
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029dd8efbfe065790800000000000000
+      internalID: -7541824050515027680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 61
+        width: 177
+        height: 364
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 149c32b8d8a4b2ae0800000000000000
+      internalID: -1573081673050633919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_5
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 61
+        width: 188
+        height: 318
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d5a0952993a9650800000000000000
+      internalID: 6240363534397103458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_6
+      rect:
+        serializedVersion: 2
+        x: 2520
+        y: 54
+        width: 211
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc28420239adb530800000000000000
+      internalID: 3872437286860238037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_7
+      rect:
+        serializedVersion: 2
+        x: 2926
+        y: 45
+        width: 220
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 357e1fe168f6a3b20800000000000000
+      internalID: 3114924714115589971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_8
+      rect:
+        serializedVersion: 2
+        x: 3308
+        y: 50
+        width: 275
+        height: 210
+      alignment: 9
+      pivot: {x: 0.4854723, y: 1.0711432}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac70336ea4db2640800000000000000
+      internalID: 5056368852107033768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_9
+      rect:
+        serializedVersion: 2
+        x: 3715
+        y: 50
+        width: 288
+        height: 218
+      alignment: 9
+      pivot: {x: 0.48612213, y: 1.0501837}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79760c0082a486cb0800000000000000
+      internalID: -4870561461329434729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_10
+      rect:
+        serializedVersion: 2
+        x: 4094
+        y: 52
+        width: 292
+        height: 234
+      alignment: 9
+      pivot: {x: 0.48631307, y: 1.0809062}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b1327a5622a6790800000000000000
+      internalID: -7536173206459966649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_11
+      rect:
+        serializedVersion: 2
+        x: 4523
+        y: 54
+        width: 260
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5000075, y: 1.073484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99f9bc9dd682685c0800000000000000
+      internalID: -4213635949087973479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 4800
+        height: 450
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6772a7969cb56419f9435a5de8d780
+      internalID: 1718158716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_13
+      rect:
+        serializedVersion: 2
+        x: 4094
+        y: 52
+        width: 292
+        height: 234
+      alignment: 9
+      pivot: {x: 0.48631307, y: 1.0809062}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb16038637549034c8fee006e7620467
+      internalID: -274605010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Heavy-Attack_14
+      rect:
+        serializedVersion: 2
+        x: 4523
+        y: 54
+        width: 260
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5000075, y: 1.073484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc52c43cdae403346a0411e9af8fe737
+      internalID: 535096918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6020a236657c0cd45baf722b891bca4e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Doctor_Heavy-Attack_0: 5802770478068860369
+      Doctor_Heavy-Attack_1: -6488379525040457787
+      Doctor_Heavy-Attack_10: -7536173206459966649
+      Doctor_Heavy-Attack_11: -4213635949087973479
+      Doctor_Heavy-Attack_12: 1718158716
+      Doctor_Heavy-Attack_13: -274605010
+      Doctor_Heavy-Attack_14: 535096918
+      Doctor_Heavy-Attack_2: -5138260755953000283
+      Doctor_Heavy-Attack_3: -7541824050515027680
+      Doctor_Heavy-Attack_4: -1573081673050633919
+      Doctor_Heavy-Attack_5: 6240363534397103458
+      Doctor_Heavy-Attack_6: 3872437286860238037
+      Doctor_Heavy-Attack_7: 3114924714115589971
+      Doctor_Heavy-Attack_8: 5056368852107033768
+      Doctor_Heavy-Attack_9: -4870561461329434729
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

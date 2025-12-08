@@ -1,0 +1,27 @@
+# Unity generated files
+Library/
+Temp/
+obj/
+Logs/
+UserSettings/
+
+# Build folders
+Build/
+Builds/
+
+# Visual Studio files
+.vs/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+.vsconfig
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+
+# OS files
+.DS_Store
+Thumbs.db

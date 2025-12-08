@@ -1,0 +1,4 @@
+repository "Cyndikato_Spinoff 2025-11-10_19-04-25/Cyndikato_Spinoff@18968325375929@cloud"
+  path "/"
+    br "/main"
+    co "/main"

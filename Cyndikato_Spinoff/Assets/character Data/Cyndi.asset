@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95a1bb9a81edcc4ebe3e5d56dc983f4, type: 3}
+  m_Name: Cyndi
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectData
+  characterName: Cyndi
+  characterDescription: 
+  characterIcon: {fileID: -5521333569484247171, guid: 5e40c7f7b12e7354592b6e27a2c8556b, type: 3}
+  characterFullArt: {fileID: -3856072011681961445, guid: 0a36d42233c661b418f28daf40a24a58, type: 3}
+  idleAnimationFrames:
+  - {fileID: 8323439144207953694, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: -2075261025099173912, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: 2872890314313681066, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: -2557089672153439493, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: 9189700474620162656, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: 1173168490196670297, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: -3058875594957820937, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: 8136966684183868099, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  - {fileID: 6338253673169550806, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
+  animationSpeed: 0.3
+  loopAnimation: 1
+  characterPrefab: {fileID: 0}
+  health: 100
+  speed: 5
+  attack: 10

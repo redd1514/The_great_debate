@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95a1bb9a81edcc4ebe3e5d56dc983f4, type: 3}
+  m_Name: Doctor
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectData
+  characterName: Doctor
+  characterDescription: 
+  characterIcon: {fileID: -3708997832666306964, guid: f962bf3543a7e3b47bad1942ef6a32b2, type: 3}
+  characterFullArt: {fileID: -5461496712832900230, guid: ea02fb624d0d2ae46aae16c0c8cfffe0, type: 3}
+  idleAnimationFrames:
+  - {fileID: 763485721513385764, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: -4480895718824724983, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: -4289226859340454289, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: -2022315400741305517, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: 8241860260035382090, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: 7520305180195337386, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: 6048791292428692266, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: 7543050865667289969, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  - {fileID: 8857847668737679065, guid: 3fa996a192889984d8ee2d5381747736, type: 3}
+  animationSpeed: 0.1
+  loopAnimation: 1
+  characterPrefab: {fileID: 0}
+  health: 100
+  speed: 5
+  attack: 10
