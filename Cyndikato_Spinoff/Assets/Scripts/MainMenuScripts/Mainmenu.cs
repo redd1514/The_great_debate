@@ -253,10 +253,19 @@ public class Mainmenu : MonoBehaviour
     {
         Debug.Log("Starting game - Loading Character Select...");
         
-        // Load character select scene
+        // Load character select scene using SceneFlowManager for smooth transition
         if (!string.IsNullOrEmpty(characterSelectSceneName))
         {
-            SceneManager.LoadScene(characterSelectSceneName);
+            SceneFlowManager manager = SceneFlowManager.Instance;
+            if (manager != null)
+            {
+                manager.LoadCharacterSelect();
+            }
+            else
+            {
+                // Fallback to direct loading if SceneFlowManager not available
+                SceneManager.LoadScene(characterSelectSceneName);
+            }
         }
         else
         {
