@@ -7,22 +7,36 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Map Selection Manager with Random Map Selection.
+/// Map Selection Manager with Random Map Selection or Player Voting.
 /// FIXED: Multiple instance protection and single map selection
-/// Flow: Character Select -> Random Map Selection with Loading Screen -> Gameplay
+/// Flow: Character Select -> Map Selection (Random or Voting) -> Gameplay
 /// </summary>
+public enum MapSelectionMode
+{
+    Random,  // Random map selection
+    Voting   // Player voting system
+}
+
 public class MapSelectionManager : MonoBehaviour
 {
     [Header("Map Data")]
     public MapData[] availableMaps;
     
+    [Header("Map Selection Mode")]
+    [Tooltip("Choose between random selection or player voting")]
+    public MapSelectionMode selectionMode = MapSelectionMode.Random;
+    
     [Header("Random Map Selection")]
-    [Tooltip("If enabled, randomly selects a map and shows loading screen instead of voting")]
-    public bool useRandomMapSelection = true;
+    [Tooltip("Settings for random map selection mode")]
+    public bool useRandomMapSelection = true; // Legacy compatibility
     [Range(1f, 10f)]
     public float randomSelectionDelay = 3f;
     [Range(1f, 10f)]
     public float loadingScreenDuration = 4f;
+    
+    [Header("Voting System")]
+    [Tooltip("Settings for player voting mode")]
+    public MapVotingManager votingManager;
     
     [Header("UI References")]
     public Transform mapGridParent;
@@ -164,10 +178,28 @@ public class MapSelectionManager : MonoBehaviour
             Debug.Log($"Found {availableMaps.Length} assigned maps");
         }
         
-        // Always use random selection (bypass input issues)
-        if (useRandomMapSelection)
+        // Choose selection mode
+        if (selectionMode == MapSelectionMode.Voting)
         {
-            // Start with a small delay to ensure everything is set up
+            // Use voting system
+            if (votingManager != null)
+            {
+                Debug.Log("MapSelectionManager: Using voting system mode");
+                // Voting manager handles its own initialization
+                // Disable random selection
+                this.enabled = false; // Disable this manager's Update loop
+            }
+            else
+            {
+                Debug.LogWarning("MapSelectionManager: Voting mode selected but votingManager not assigned! Falling back to random.");
+                selectionMode = MapSelectionMode.Random;
+                StartCoroutine(StartRandomMapSelectionDelayed());
+            }
+        }
+        else if (useRandomMapSelection || selectionMode == MapSelectionMode.Random)
+        {
+            // Use random selection (bypass input issues)
+            Debug.Log("MapSelectionManager: Using random selection mode");
             StartCoroutine(StartRandomMapSelectionDelayed());
         }
         else

@@ -489,6 +489,11 @@ public class NewCharacterSelectManager : MonoBehaviour
         {
             players[playerIndex].isJoined = true;
             players[playerIndex].selectedCharacterIndex = 0; // Start at first character
+            
+            // Store input device and color for map voting persistence
+            players[playerIndex].inputDevice = ConvertToInputDeviceType(device);
+            players[playerIndex].playerColor = playerSelectionColors[playerIndex];
+            
             usedDevices.Add(device);
             deviceToPlayerMap[device] = playerIndex;
             
@@ -506,6 +511,19 @@ public class NewCharacterSelectManager : MonoBehaviour
 
             string deviceName = device == InputDevice.Keyboard ? "Keyboard" : $"Controller {(int)device}";
             Debug.Log($"Player {playerIndex + 1} joined with {deviceName} - Selection Color: {playerSelectionColors[playerIndex].ToString()}");
+        }
+    }
+    
+    // Convert local InputDevice enum to PlayerCharacterData.InputDeviceType
+    InputDeviceType ConvertToInputDeviceType(InputDevice device)
+    {
+        switch (device)
+        {
+            case InputDevice.Keyboard: return InputDeviceType.Keyboard;
+            case InputDevice.Controller1: return InputDeviceType.Controller1;
+            case InputDevice.Controller2: return InputDeviceType.Controller2;
+            case InputDevice.Controller3: return InputDeviceType.Controller3;
+            default: return InputDeviceType.None;
         }
     }
 
