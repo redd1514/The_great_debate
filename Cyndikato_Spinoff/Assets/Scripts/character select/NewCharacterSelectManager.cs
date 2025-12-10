@@ -3,17 +3,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class NewCharacterSelectManager : MonoBehaviour
 {
     [Header("UI References")]
     public PlayerPlatformUI[] playerPlatforms; // 4 platform UIs
     public CharacterGridUI characterGrid;
-    public Button startGameButton;
     public TextMeshProUGUI instructionText;
+    [Tooltip("Shown when players can join")] public TextMeshProUGUI joinPromptText;
 
     [Header("Character Data")]
     public CharacterSelectData[] availableCharacters;
+    [Tooltip("Prefabs matching availableCharacters by index (0..n-1)")]
+    public GameObject[] characterPrefabs;
 
     [Header("Settings")]
     public int maxPlayers = 4;
@@ -21,6 +25,8 @@ public class NewCharacterSelectManager : MonoBehaviour
     public string mapSelectionSceneName = "MapSelectionScene"; // New field for map selection
     [Range(0.5f, 5f)]
     public float autoProgressDelay = 2f; // Delay before auto-progression
+    [Tooltip("Allow Player 1 to use keyboard if no controllers are connected.")]
+    public bool allowPlayer1KeyboardFallback = true;
 
     [Header("Auto-Progression Settings")]
     public bool enableAutoProgression = true; // Allow disabling if needed
@@ -41,24 +47,22 @@ public class NewCharacterSelectManager : MonoBehaviour
     private PlayerCharacterData[] players;
     private int currentActivePlayer = 0; // Keep for UI display purposes
     
-    [Header("Input Device Tracking")]
-    private Dictionary<InputDevice, int> deviceToPlayerMap = new Dictionary<InputDevice, int>();
-    private HashSet<InputDevice> usedDevices = new HashSet<InputDevice>();
-    
-    // Track previous input states to prevent repeated navigation
-    private bool[] previousHorizontalInput = new bool[4];
-    private bool[] previousVerticalInput = new bool[4];
+    [Header("Input (New Input System)")]
+    private Dictionary<Gamepad, int> padToPlayer = new Dictionary<Gamepad, int>();
+    private Keyboard keyboard;
+    private int keyboardPlayerIndex = -1;
+    private bool keyboardJoined = false;
 
     public static NewCharacterSelectManager Instance;
+    private float[] navCooldownX = new float[4];
+    private float[] navCooldownY = new float[4];
+    [Range(0.05f, 0.5f)] public float navRepeatDelay = 0.25f;
 
-    public enum InputDevice
-    {
-        Keyboard,
-        Controller1,
-        Controller2,
-        Controller3,
-        Controller4
-    }
+    // Prevent immediate lock on the same frame a device joins
+    private HashSet<Gamepad> padsJoinedThisFrame = new HashSet<Gamepad>();
+    private bool keyboardJoinedThisFrameFlag = false;
+    private bool hasTransitionedToMapSelection = false;
+
 
     void Awake()
     {
@@ -90,16 +94,8 @@ public class NewCharacterSelectManager : MonoBehaviour
         // CRITICAL: Reset everything when returning from other scenes
         Debug.Log("NewCharacterSelectManager: Starting fresh - resetting all systems");
         
-        // Clear any corrupted state from scene transitions
-        deviceToPlayerMap.Clear();
-        usedDevices.Clear();
-        
-        // Reset input state arrays
-        for (int i = 0; i < 4; i++)
-        {
-            previousHorizontalInput[i] = false;
-            previousVerticalInput[i] = false;
-        }
+        keyboard = Keyboard.current;
+        for (int i = 0; i < 4; i++) { navCooldownX[i] = 0f; navCooldownY[i] = 0f; }
         
         if (!ValidateSetup())
         {
@@ -138,8 +134,9 @@ public class NewCharacterSelectManager : MonoBehaviour
             }
         }
 
-        // Player 1 joins automatically with keyboard (whoever started the game)
-        JoinPlayerWithDevice(0, InputDevice.Keyboard);
+        // Detect devices; joining happens on button press
+        AutoJoinConnectedDevices(); // repurposed to refresh device list only
+        UpdateJoinPrompt();
         
         // Force immediate update to ensure everything is properly initialized
         UpdateUI();
@@ -148,360 +145,274 @@ public class NewCharacterSelectManager : MonoBehaviour
         Debug.Log("New Character Select Started - Keyboard: Player 1 auto-joined | All players can select simultaneously with individual colored indicators!");
     }
 
+    void OnEnable()
+    {
+        InputSystem.onDeviceChange += OnDeviceChange;
+    }
+
+    void OnDisable()
+    {
+        InputSystem.onDeviceChange -= OnDeviceChange;
+    }
+
+    void OnDestroy()
+    {
+        // Ensure we always detach callbacks
+        InputSystem.onDeviceChange -= OnDeviceChange;
+        
+        // Clear singleton instance if this was the active one
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
+    // Expose input mapping for MapSelectionManager
+    public Dictionary<Gamepad, int> GetPadMappingsSnapshot()
+    {
+        return new Dictionary<Gamepad, int>(padToPlayer);
+    }
+
+    public bool IsKeyboardJoined() => keyboardJoined;
+    public int GetKeyboardPlayerIndex() => keyboardPlayerIndex;
+
     void Update()
     {
-        HandleAllInputDevices();
+        HandlePerPlayerInput();
         
         // Handle auto-progression to map selection
         if (enableAutoProgression)
         {
             HandleAutoProgression();
         }
+
+        // Clear one-frame join suppression flags
+        if (padsJoinedThisFrame.Count > 0) padsJoinedThisFrame.Clear();
+        if (keyboardJoinedThisFrameFlag) keyboardJoinedThisFrameFlag = false;
     }
     
-    void HandleAllInputDevices()
+    private void OnDeviceChange(UnityEngine.InputSystem.InputDevice device, UnityEngine.InputSystem.InputDeviceChange change)
     {
-        // CRITICAL DEBUG: Show that this method is running
-        if (Input.anyKeyDown)
+        if (device is Gamepad)
         {
-            Debug.Log($"NewCharacterSelectManager.HandleAllInputDevices: Input detected! Checking {deviceToPlayerMap.Count} mapped devices");
+            // If a mapped pad was removed, unjoin the player
+            if (change == UnityEngine.InputSystem.InputDeviceChange.Removed || change == UnityEngine.InputSystem.InputDeviceChange.Disconnected)
+            {
+                var gp = device as Gamepad;
+                if (gp != null && padToPlayer.TryGetValue(gp, out int pIndex))
+                {
+                    padToPlayer.Remove(gp);
+                    if (pIndex >= 0 && pIndex < maxPlayers)
+                    {
+                        players[pIndex].isJoined = false;
+                    }
+                    UpdateUI();
+                }
+            }
+            AutoJoinConnectedDevices();
+            UpdateJoinPrompt();
         }
-        
-        // Handle keyboard input
-        HandleDeviceInput(InputDevice.Keyboard);
-        
-        // Handle controller inputs
-        HandleDeviceInput(InputDevice.Controller1);
-        HandleDeviceInput(InputDevice.Controller2);
-        HandleDeviceInput(InputDevice.Controller3);
-        HandleDeviceInput(InputDevice.Controller4);
     }
 
-    void HandleDeviceInput(InputDevice device)
+    void AutoJoinConnectedDevices()
     {
-        // CRITICAL: Show which device we're checking
-        if (device == InputDevice.Keyboard && Input.anyKeyDown)
+        // Refresh device list and prune mappings for disconnected pads
+        var existing = new List<Gamepad>(padToPlayer.Keys);
+        foreach (var gp in existing)
         {
-            Debug.Log($"NewCharacterSelectManager.HandleDeviceInput: Checking keyboard input");
+            bool stillConnected = false;
+            foreach (var p in Gamepad.all)
+            {
+                if (ReferenceEquals(p, gp)) { stillConnected = true; break; }
+            }
+            if (!stillConnected)
+            {
+                int idx = padToPlayer[gp];
+                padToPlayer.Remove(gp);
+                if (idx >= 0 && idx < maxPlayers) players[idx].isJoined = false;
+            }
         }
-        
-        // Check for join input (any key/button pressed)
-        if (GetAnyButtonDown(device))
-        {
-            TryJoinWithDevice(device);
-        }
+        // Do not auto-join here; joining occurs on button press
+        UpdateUI();
+    }
 
-        // Only handle navigation/actions for devices that have joined players
-        if (deviceToPlayerMap.ContainsKey(device))
+    void HandlePerPlayerInput()
+    {
+        HandleJoins();
+        // Iterate joined players and read from their assigned device
+        foreach (var kv in padToPlayer)
         {
-            int playerIndex = deviceToPlayerMap[device];
-            
-            Debug.Log($"NewCharacterSelectManager: Device {device} mapped to Player {playerIndex + 1}");
-            
-            // Check for special input during auto-progression
+            var pad = kv.Key;
+            int pIndex = kv.Value;
+            if (!players[pIndex].isJoined) continue;
+
+            // Skip processing inputs on the first frame a pad joins
+            if (padsJoinedThisFrame.Contains(pad))
+            {
+                continue;
+            }
+
             if (isAutoProgressing)
             {
-                // Any submit input during auto-progression proceeds immediately
-                if (GetSubmitInput(device))
-                {
-                    ProceedToMapSelectionImmediately();
-                    return;
-                }
-                
-                // Any cancel input cancels auto-progression (unlocks the player's character)
-                if (GetCancelInput(device))
-                {
-                    UnlockCharacterSelection(playerIndex);
-                    return;
-                }
-                
-                // Don't allow navigation during auto-progression
+                if (GetSubmitFromPad(pad)) { ProceedToMapSelectionImmediately(); return; }
+                if (GetCancelFromPad(pad)) { UnlockCharacterSelection(pIndex); return; }
+                continue;
+            }
+
+            var nav = GetNavigationFromPad(pIndex, pad);
+            if (nav != Vector2.zero) OnNavigate(nav, pIndex);
+            if (GetSubmitFromPad(pad)) OnSubmit(pIndex);
+            if (GetCancelFromPad(pad)) OnCancel(pIndex);
+        }
+
+        // Keyboard input if joined
+        if (allowPlayer1KeyboardFallback && keyboardJoined && keyboard != null && keyboardPlayerIndex >= 0)
+        {
+            // Skip processing inputs on the first frame the keyboard joins
+            if (keyboardJoinedThisFrameFlag)
+            {
+                // Do not process keyboard inputs this frame
                 return;
             }
-            
-            // Normal navigation and actions when not auto-progressing
-            // Navigation
-            Vector2 input = GetNavigationInput(device);
-            if (input != Vector2.zero)
+            if (isAutoProgressing)
             {
-                Debug.Log($"NewCharacterSelectManager: Navigation input {input} detected for Player {playerIndex + 1}");
-                OnNavigate(input, playerIndex);
+                if (keyboard.enterKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame) { ProceedToMapSelectionImmediately(); return; }
+                if (keyboard.escapeKey.wasPressedThisFrame) { UnlockCharacterSelection(keyboardPlayerIndex); return; }
+                return;
             }
 
-            // Submit
-            if (GetSubmitInput(device))
+            Vector2 nav = Vector2.zero;
+            if (keyboard.leftArrowKey.wasPressedThisFrame || keyboard.aKey.wasPressedThisFrame) nav = Vector2.left;
+            else if (keyboard.rightArrowKey.wasPressedThisFrame || keyboard.dKey.wasPressedThisFrame) nav = Vector2.right;
+            else if (keyboard.upArrowKey.wasPressedThisFrame || keyboard.wKey.wasPressedThisFrame) nav = Vector2.up;
+            else if (keyboard.downArrowKey.wasPressedThisFrame || keyboard.sKey.wasPressedThisFrame) nav = Vector2.down;
+            if (nav != Vector2.zero) OnNavigate(nav, keyboardPlayerIndex);
+
+            if (keyboard.enterKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame) OnSubmit(keyboardPlayerIndex);
+            if (keyboard.escapeKey.wasPressedThisFrame) OnCancel(keyboardPlayerIndex);
+        }
+    }
+
+    void HandleJoins()
+    {
+        // Gamepad joins on any button press
+        foreach (var pad in Gamepad.all)
+        {
+            if (padToPlayer.ContainsKey(pad)) continue;
+            if (AnyPadButtonPressed(pad))
             {
-                OnSubmit(playerIndex);
-            }
-
-            // Cancel (only for non-keyboard players)
-            if (GetCancelInput(device) && device != InputDevice.Keyboard)
-            {
-                OnCancel(playerIndex);
-            }
-        }
-        else if (device == InputDevice.Keyboard && Input.anyKeyDown)
-        {
-            Debug.LogWarning($"NewCharacterSelectManager: Keyboard input detected but device not mapped to any player!");
-            Debug.LogWarning($"Current device mappings: {deviceToPlayerMap.Count}");
-            foreach (var mapping in deviceToPlayerMap)
-            {
-                Debug.LogWarning($"  {mapping.Key} -> Player {mapping.Value + 1}");
-            }
-        }
-    }
-
-    bool GetAnyButtonDown(InputDevice device)
-    {
-        switch (device)
-        {
-            case InputDevice.Keyboard:
-                // Exclude navigation and action keys from join detection
-                return Input.anyKeyDown && !IsNavigationOrActionKey();
-                
-            case InputDevice.Controller1:
-                return GetControllerAnyButtonDown("joystick 1");
-                
-            case InputDevice.Controller2:
-                return GetControllerAnyButtonDown("joystick 2");
-                
-            case InputDevice.Controller3:
-                return GetControllerAnyButtonDown("joystick 3");
-                
-            case InputDevice.Controller4:
-                return GetControllerAnyButtonDown("joystick 4");
-        }
-        return false;
-    }
-
-    bool GetControllerAnyButtonDown(string joystickName)
-    {
-        // Check all common controller buttons
-        for (int i = 0; i < 20; i++) // Check buttons 0-19
-        {
-            if (Input.GetKeyDown($"{joystickName} button {i}"))
-                return true;
-        }
-        return false;
-    }
-
-    bool IsNavigationOrActionKey()
-    {
-        return Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) ||
-               Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) ||
-               Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
-               Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) ||
-               Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) ||
-               Input.GetKeyDown(KeyCode.Escape);
-    }
-
-    Vector2 GetNavigationInput(InputDevice device)
-    {
-        Vector2 input = Vector2.zero;
-        
-        switch (device)
-        {
-            case InputDevice.Keyboard:
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+                int next = GetNextAvailablePlayerIndex();
+                if (next != -1)
                 {
-                    input = Vector2.left;
-                    Debug.Log("!!! KEYBOARD LEFT INPUT DETECTED !!!");
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-                {
-                    input = Vector2.right;
-                    Debug.Log("!!! KEYBOARD RIGHT INPUT DETECTED !!!");
-                }
-                else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-                {
-                    input = Vector2.up;
-                    Debug.Log("!!! KEYBOARD UP INPUT DETECTED !!!");
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-                {
-                    input = Vector2.down;
-                    Debug.Log("!!! KEYBOARD DOWN INPUT DETECTED !!!");
-                }
-                break;
-                
-            case InputDevice.Controller1:
-            case InputDevice.Controller2:
-            case InputDevice.Controller3:
-            case InputDevice.Controller4:
-                input = GetControllerNavigationSimple(device);
-                break;
-        }
-        
-        return input;
-    }
-
-    Vector2 GetControllerNavigationSimple(InputDevice device)
-    {
-        int controllerIndex = (int)device - 1; // Controller1 = 0, Controller2 = 1, etc.
-        string joystickName = $"joystick {controllerIndex + 1}";
-        
-        Vector2 input = Vector2.zero;
-        
-        // Use button-based navigation for reliability
-        // Standard Xbox controller button mappings
-        if (Input.GetKeyDown($"{joystickName} button 13")) // D-pad left
-        {
-            input.x = -1f;
-            Debug.Log($"Controller {controllerIndex + 1}: D-pad Left");
-        }
-        else if (Input.GetKeyDown($"{joystickName} button 14")) // D-pad right
-        {
-            input.x = 1f;  
-            Debug.Log($"Controller {controllerIndex + 1}: D-pad Right");
-        }
-        
-        if (Input.GetKeyDown($"{joystickName} button 11")) // D-pad up
-        {
-            input.y = 1f;  
-            Debug.Log($"Controller {controllerIndex + 1}: D-pad Up");
-        }
-        else if (Input.GetKeyDown($"{joystickName} button 12")) // D-pad down
-        {
-            input.y = -1f; 
-            Debug.Log($"Controller {controllerIndex + 1}: D-pad Down");
-        }
-        
-        // Try analog stick input for the first controller only (to avoid Input Manager issues)
-        if (controllerIndex == 0 && input == Vector2.zero)
-        {
-            try 
-            {
-                float horizontal = Input.GetAxis("Horizontal");
-                float vertical = Input.GetAxis("Vertical");
-                
-                // Convert analog input to discrete navigation
-                if (Mathf.Abs(horizontal) > 0.8f && !previousHorizontalInput[controllerIndex])
-                {
-                    input.x = horizontal > 0 ? 1f : -1f;
-                    previousHorizontalInput[controllerIndex] = true;
-                    Debug.Log($"Controller {controllerIndex + 1}: Analog stick horizontal");
-                }
-                else if (Mathf.Abs(horizontal) <= 0.3f)
-                {
-                    previousHorizontalInput[controllerIndex] = false;
-                }
-                
-                if (Mathf.Abs(vertical) > 0.8f && !previousVerticalInput[controllerIndex])
-                {
-                    input.y = vertical > 0 ? 1f : -1f;
-                    previousVerticalInput[controllerIndex] = true;
-                    Debug.Log($"Controller {controllerIndex + 1}: Analog stick vertical");
-                }
-                else if (Mathf.Abs(vertical) <= 0.3f)
-                {
-                    previousVerticalInput[controllerIndex] = false;
+                    JoinPlayerForPad(next, pad);
                 }
             }
-            catch (System.ArgumentException)
+        }
+
+        // Keyboard join
+        if (allowPlayer1KeyboardFallback && !keyboardJoined && keyboard != null)
+        {
+            if (KeyboardAnyJoinPressed(keyboard))
             {
-                // Default axes not available, stick with D-pad only
+                int next = GetNextAvailablePlayerIndex();
+                if (next != -1)
+                {
+                    JoinPlayerForKeyboard(next);
+                }
             }
         }
-        
-        return input;
+
+        UpdateJoinPrompt();
     }
 
-    bool GetSubmitInput(InputDevice device)
+    int GetNextAvailablePlayerIndex()
     {
-        switch (device)
-        {
-            case InputDevice.Keyboard:
-                return Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space);
-                
-            case InputDevice.Controller1:
-            case InputDevice.Controller2:
-            case InputDevice.Controller3:
-            case InputDevice.Controller4:
-                int controllerIndex = (int)device - 1;
-                string joystickName = $"joystick {controllerIndex + 1}";
-                
-                // A button (button 0) and Start button (button 7 or 9 depending on controller)
-                bool submitPressed = Input.GetKeyDown($"{joystickName} button 0") ||    // A button
-                                   Input.GetKeyDown($"{joystickName} button 7") ||    // Start button (Xbox)
-                                   Input.GetKeyDown($"{joystickName} button 9");     // Start button (PS4)
-                
-                if (submitPressed)
-                {
-                    Debug.Log($"Controller {controllerIndex + 1}: Submit button pressed");
-                }
-                
-                return submitPressed;
-        }
-        return false;
-    }
-
-    bool GetCancelInput(InputDevice device)
-    {
-        switch (device)
-        {
-            case InputDevice.Keyboard:
-                return Input.GetKeyDown(KeyCode.Escape);
-                
-            case InputDevice.Controller1:
-            case InputDevice.Controller2:
-            case InputDevice.Controller3:
-            case InputDevice.Controller4:
-                int controllerIndex = (int)device - 1;
-                string joystickName = $"joystick {controllerIndex + 1}";
-                
-                // B button (button 1) and Back/Select button
-                bool cancelPressed = Input.GetKeyDown($"{joystickName} button 1") ||    // B button
-                                   Input.GetKeyDown($"{joystickName} button 6") ||    // Back button (Xbox)
-                                   Input.GetKeyDown($"{joystickName} button 8");     // Select/Share button (PS4)
-                
-                if (cancelPressed)
-                {
-                    Debug.Log($"Controller {controllerIndex + 1}: Cancel button pressed");
-                }
-                
-                return cancelPressed;
-        }
-        return false;
-    }
-
-    void TryJoinWithDevice(InputDevice device)
-    {
-        // Don't allow join if device is already used
-        if (usedDevices.Contains(device))
-        {
-            return;
-        }
-
-        // Find next available player slot
         for (int i = 0; i < maxPlayers; i++)
         {
-            if (!players[i].isJoined)
-            {
-                JoinPlayerWithDevice(i, device);
-                break;
-            }
+            if (!players[i].isJoined) return i;
         }
+        return -1;
     }
 
-    void JoinPlayerWithDevice(int playerIndex, InputDevice device)
+    void JoinPlayerForPad(int playerIndex, Gamepad pad)
     {
-        if (players[playerIndex].isJoined) return;
-
         players[playerIndex].isJoined = true;
-        players[playerIndex].inputDeviceName = device.ToString(); // Fix: Use ToString() instead of .name
-        players[playerIndex].inputDeviceId = (int)device; // Fix: Cast enum to int instead of .deviceId
-
-        // Add device mapping
-        deviceToPlayerMap[device] = playerIndex;
-        usedDevices.Add(device);
-
-        // Set player color based on index
-        Color[] playerColors = { Color.red, Color.blue, Color.green, Color.yellow };
-        players[playerIndex].playerColor = playerColors[playerIndex % playerColors.Length];
-
-        Debug.Log($"Player {playerIndex + 1} joined with device: {device.ToString()} (Color: {players[playerIndex].playerColor})");
-
+        players[playerIndex].selectedCharacterIndex = 0;
+        padToPlayer[pad] = playerIndex;
+        padsJoinedThisFrame.Add(pad);
+        if (characterGrid != null)
+        {
+            characterGrid.InitializePlayerSelection(playerIndex, playerSelectionColors[playerIndex]);
+        }
         UpdateUI();
+    }
+
+    void JoinPlayerForKeyboard(int playerIndex)
+    {
+        players[playerIndex].isJoined = true;
+        players[playerIndex].selectedCharacterIndex = 0;
+        keyboardPlayerIndex = playerIndex;
+        keyboardJoined = true;
+        keyboardJoinedThisFrameFlag = true;
+        if (characterGrid != null)
+        {
+            characterGrid.InitializePlayerSelection(playerIndex, playerSelectionColors[playerIndex]);
+        }
+        UpdateUI();
+    }
+
+    bool AnyPadButtonPressed(Gamepad pad)
+    {
+        return pad.buttonSouth.wasPressedThisFrame || pad.buttonEast.wasPressedThisFrame ||
+               pad.buttonNorth.wasPressedThisFrame || pad.buttonWest.wasPressedThisFrame ||
+               pad.startButton.wasPressedThisFrame || pad.selectButton.wasPressedThisFrame ||
+               pad.leftShoulder.wasPressedThisFrame || pad.rightShoulder.wasPressedThisFrame ||
+               pad.leftStickButton.wasPressedThisFrame || pad.rightStickButton.wasPressedThisFrame ||
+               pad.dpad.up.wasPressedThisFrame || pad.dpad.down.wasPressedThisFrame ||
+               pad.dpad.left.wasPressedThisFrame || pad.dpad.right.wasPressedThisFrame;
+    }
+
+    bool KeyboardAnyJoinPressed(Keyboard kb)
+    {
+        return kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame || kb.anyKey.wasPressedThisFrame;
+    }
+
+    Vector2 GetNavigationFromPad(int playerIndex, Gamepad pad)
+    {
+        // Debounced D-Pad first
+        if (pad.dpad.left.wasPressedThisFrame) return Vector2.left;
+        if (pad.dpad.right.wasPressedThisFrame) return Vector2.right;
+        if (pad.dpad.up.wasPressedThisFrame) return Vector2.up;
+        if (pad.dpad.down.wasPressedThisFrame) return Vector2.down;
+
+        // Stick with simple repeat delay
+        Vector2 nav = Vector2.zero;
+        float h = pad.leftStick.x.ReadValue();
+        float v = pad.leftStick.y.ReadValue();
+        navCooldownX[playerIndex] = Mathf.Max(0f, navCooldownX[playerIndex] - Time.unscaledDeltaTime);
+        navCooldownY[playerIndex] = Mathf.Max(0f, navCooldownY[playerIndex] - Time.unscaledDeltaTime);
+        const float threshold = 0.6f;
+        if (Mathf.Abs(h) > threshold && navCooldownX[playerIndex] <= 0f)
+        {
+            nav.x = h > 0 ? 1f : -1f;
+            navCooldownX[playerIndex] = navRepeatDelay;
+        }
+        if (Mathf.Abs(v) > threshold && navCooldownY[playerIndex] <= 0f)
+        {
+            nav.y = v > 0 ? 1f : -1f;
+            navCooldownY[playerIndex] = navRepeatDelay;
+        }
+        return nav;
+    }
+
+    bool GetSubmitFromPad(Gamepad pad)
+    {
+        return pad.buttonSouth.wasPressedThisFrame || pad.startButton.wasPressedThisFrame;
+    }
+
+    bool GetCancelFromPad(Gamepad pad)
+    {
+        return pad.buttonEast.wasPressedThisFrame || pad.selectButton.wasPressedThisFrame;
     }
 
     void InitializePlayers()
@@ -578,7 +489,8 @@ public class NewCharacterSelectManager : MonoBehaviour
 
     void OnSubmit(int playerIndex)
     {
-        if (playerIndex == currentActivePlayer && players[playerIndex].isJoined && !players[playerIndex].hasLockedCharacter)
+        // Allow any joined player to lock independently
+        if (players[playerIndex].isJoined && !players[playerIndex].hasLockedCharacter)
         {
             LockCharacterSelection(playerIndex);
         }
@@ -611,6 +523,16 @@ public class NewCharacterSelectManager : MonoBehaviour
                 {
                     players[playerIndex].hasLockedCharacter = true;
                     players[playerIndex].lockedCharacter = selectedCharacter;
+
+                    // Remember selection for gameplay spawn (prefab + device)
+                    GameObject prefab = null;
+                    int sel = players[playerIndex].selectedCharacterIndex;
+                    if (characterPrefabs != null && sel >= 0 && sel < characterPrefabs.Length)
+                    {
+                        prefab = characterPrefabs[sel];
+                    }
+                    var device = GetDeviceForPlayer(playerIndex);
+                    CharacterSelectionState.SetSelection(playerIndex, prefab, device);
 
                     // No longer need to switch to next player - each player locks independently
                     UpdateUI();
@@ -654,19 +576,18 @@ public class NewCharacterSelectManager : MonoBehaviour
     {
         if (playerIndex > 0) // Player 1 cannot leave
         {
-            // Find and remove the device mapping
-            InputDevice deviceToRemove = InputDevice.Keyboard;
-            foreach (var kvp in deviceToPlayerMap)
+            // Remove pad mapping if present
+            Gamepad padToRemove = null;
+            foreach (var kv in padToPlayer)
             {
-                if (kvp.Value == playerIndex)
-                {
-                    deviceToRemove = kvp.Key;
-                    break;
-                }
+                if (kv.Value == playerIndex) { padToRemove = kv.Key; break; }
             }
-            
-            deviceToPlayerMap.Remove(deviceToRemove);
-            usedDevices.Remove(deviceToRemove);
+            if (padToRemove != null) padToPlayer.Remove(padToRemove);
+            if (keyboardPlayerIndex == playerIndex)
+            {
+                keyboardPlayerIndex = -1;
+                keyboardJoined = false;
+            }
             
             players[playerIndex].isJoined = false;
             players[playerIndex].hasLockedCharacter = false;
@@ -674,9 +595,23 @@ public class NewCharacterSelectManager : MonoBehaviour
 
             SwitchActivePlayer(-1);
             UpdateUI();
+            UpdateJoinPrompt();
 
             Debug.Log($"Player {playerIndex + 1} left the character select");
         }
+    }
+
+    UnityEngine.InputSystem.InputDevice GetDeviceForPlayer(int playerIndex)
+    {
+        foreach (var kv in padToPlayer)
+        {
+            if (kv.Value == playerIndex) return kv.Key; // Gamepad for this player
+        }
+        if (allowPlayer1KeyboardFallback && keyboardPlayerIndex == playerIndex && keyboard != null)
+        {
+            return keyboard;
+        }
+        return null;
     }
 
     void SwitchActivePlayer(int direction)
@@ -702,26 +637,46 @@ public class NewCharacterSelectManager : MonoBehaviour
 
     void UpdateUI()
     {
-        // Update all player platforms with their individual selections
-        for (int i = 0; i < playerPlatforms.Length; i++)
+        // Defensive checks
+        if (players == null || players.Length < maxPlayers)
         {
-            CharacterSelectData selectedChar = null;
-            if (players[i].selectedCharacterIndex >= 0 && players[i].selectedCharacterIndex < availableCharacters.Length)
-                selectedChar = availableCharacters[players[i].selectedCharacterIndex];
+            InitializePlayers();
+        }
 
-            // All joined players are considered "active" for their own selections
-            bool isActiveForThisPlayer = players[i].isJoined && !players[i].hasLockedCharacter;
-            playerPlatforms[i].UpdatePlatform(players[i], selectedChar, isActiveForThisPlayer);
+        int platformCount = (playerPlatforms != null) ? playerPlatforms.Length : 0;
+        int loopCount = Mathf.Min(maxPlayers, players != null ? players.Length : 0, platformCount);
+
+        // Update all player platforms with their individual selections
+        for (int i = 0; i < loopCount; i++)
+        {
+            var platform = playerPlatforms[i];
+            if (platform == null) continue;
+
+            var pdata = players[i];
+            CharacterSelectData selectedChar = null;
+            if (pdata != null && availableCharacters != null && availableCharacters.Length > 0)
+            {
+                int sel = pdata.selectedCharacterIndex;
+                if (sel >= 0 && sel < availableCharacters.Length)
+                    selectedChar = availableCharacters[sel];
+            }
+
+            bool isActiveForThisPlayer = pdata != null && pdata.isJoined && !pdata.hasLockedCharacter;
+            platform.UpdatePlatform(pdata, selectedChar, isActiveForThisPlayer);
         }
 
         // Update character grid with all player selections
-        if (characterGrid != null)
+        if (characterGrid != null && players != null)
         {
             characterGrid.UpdateAllPlayerSelections(players, playerSelectionColors);
         }
 
-        UpdateInstructions();
-        CheckCanStartGame();
+        // Update instructions and start button UI
+        if (instructionText != null)
+        {
+            UpdateInstructions();
+        }
+        // No Start button flow; auto-progression only
     }
 
     void UpdateInstructions()
@@ -740,7 +695,7 @@ public class NewCharacterSelectManager : MonoBehaviour
         // Show auto-progression status
         if (isAutoProgressing)
         {
-            instructions += "?? ALL PLAYERS READY! PROCEEDING TO MAP SELECTION...\n";
+            instructions += "? ALL PLAYERS READY! PROCEEDING TO MAP SELECTION...\n";
         }
         else if (CheckAllJoinedPlayersLocked())
         {
@@ -784,6 +739,20 @@ public class NewCharacterSelectManager : MonoBehaviour
 
         instructionText.text = instructions;
     }
+
+    void UpdateJoinPrompt()
+    {
+        if (joinPromptText == null) return;
+        int joinedCount = 0;
+        for (int i = 0; i < maxPlayers; i++) if (players[i].isJoined) joinedCount++;
+
+        bool canJoinMore = joinedCount < maxPlayers;
+        joinPromptText.gameObject.SetActive(canJoinMore);
+        if (canJoinMore)
+        {
+            joinPromptText.text = "Press any button to join";
+        }
+    }
     
     string GetColorName(Color color)
     {
@@ -794,84 +763,7 @@ public class NewCharacterSelectManager : MonoBehaviour
         return "Color";
     }
 
-    void CheckCanStartGame()
-    {
-        bool canStart = false;
-        bool allJoinedPlayersReady = CheckAllJoinedPlayersLocked();
-
-        for (int i = 0; i < maxPlayers; i++)
-        {
-            if (players[i].hasLockedCharacter)
-            {
-                canStart = true;
-                break;
-            }
-        }
-
-        startGameButton.interactable = canStart;
-        
-        // Update button text based on state
-        if (startGameButton.GetComponentInChildren<Text>() != null)
-        {
-            Text buttonText = startGameButton.GetComponentInChildren<Text>();
-            if (allJoinedPlayersReady)
-            {
-                buttonText.text = "Go to Map Selection";
-            }
-            else
-            {
-                buttonText.text = "Start Game";
-            }
-        }
-    }
-
-    public void StartGame()
-    {
-        // Check if we should go to map selection instead
-        if (CheckAllJoinedPlayersLocked())
-        {
-            ProceedToMapSelection();
-            return;
-        }
-        
-        // Original start game logic for when not all players are ready
-        Debug.Log("=== STARTING GAME WITH SELECTED CHARACTERS ===");
-
-        List<CharacterSelectData> selectedCharacters = new List<CharacterSelectData>();
-
-        for (int i = 0; i < maxPlayers; i++)
-        {
-            if (players[i].hasLockedCharacter)
-            {
-                selectedCharacters.Add(players[i].lockedCharacter);
-                Debug.Log($"Player {i + 1}: {players[i].lockedCharacter.characterName}");
-            }
-        }
-
-        if (GameDataManager.Instance != null)
-        {
-            GameDataManager.Instance.SetSelectedCharacters(players);
-        }
-        else
-        {
-            Debug.LogWarning("GameDataManager instance not found!");
-        }
-
-        SceneManager.LoadScene(gameSceneName);
-    }
-    
-    // New public method for UI buttons
-    public void ForceStartMapSelection()
-    {
-        if (CheckAllJoinedPlayersLocked())
-        {
-            ProceedToMapSelection();
-        }
-        else
-        {
-            Debug.LogWarning("NewCharacterSelectManager: Cannot proceed to Map Selection - not all joined players have locked their characters!");
-        }
-    }
+    // Start button flow removed: auto-progression only
     
     // Public method to toggle auto-progression
     public void ToggleAutoProgression(bool enabled)
@@ -996,6 +888,8 @@ public class NewCharacterSelectManager : MonoBehaviour
     
     void ProceedToMapSelection()
     {
+        if (hasTransitionedToMapSelection) return;
+        hasTransitionedToMapSelection = true;
         Debug.Log("=== AUTO-PROCEEDING TO MAP SELECTION ===");
         
         // Store selected characters in GameDataManager
@@ -1017,6 +911,16 @@ public class NewCharacterSelectManager : MonoBehaviour
             Debug.LogWarning("GameDataManager instance not found!");
         }
         
+        // Ensure normal timescale
+        if (Time.timeScale != 1f) Time.timeScale = 1f;
+
+        // Detach input callbacks to avoid referencing old scene UI
+        InputSystem.onDeviceChange -= OnDeviceChange;
+
+        // Keep this manager instance alive for the map selection scene
+        // Don't destroy it as MapSelectionManager needs the device mappings
+        DontDestroyOnLoad(gameObject);
+
         // Load map selection scene
         SceneManager.LoadScene(mapSelectionSceneName);
     }

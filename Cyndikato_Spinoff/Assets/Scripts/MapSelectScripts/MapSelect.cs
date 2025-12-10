@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MapSelect : MonoBehaviour
 {
@@ -10,197 +10,129 @@ public class MapSelect : MonoBehaviour
     public class MapOption
     {
         public string mapName;
+        public string sceneName; // ? ADD THIS: actual scene name to load
         public Image mapImage;
-        public TextMeshProUGUI voteCountText;
-        public int votes = 0;
     }
 
-    [Header("Map Options")]
+    [Header("Map Options (4)")]
     public MapOption[] maps = new MapOption[4];
-    public MapOption randomOption;
 
-    [Header("Voting Settings")]
+    [Header("Timer")]
     public float votingDuration = 10f;
     public TextMeshProUGUI timerText;
-    public TextMeshProUGUI selectedMapText;
-    
-    private Vector2 timerOriginalPivot;
 
-    [Header("Animation Settings")]
-    public float zoomScale = 1.5f;
-    public float zoomDuration = 0.5f;
-    public float timerPulseScale = 1.3f;
-    public float timerPulseDuration = 0.5f;
-    public Canvas canvas;
+    [Header("Navigation")]
+    public int mapsPerRow = 2; // 2x2 grid by default
+    public float navRepeatDelay = 0.25f; // left stick repeat delay
 
-    private Dictionary<int, int> playerVotes = new Dictionary<int, int>();
+    [Header("Player Indicators")]
+    public Color[] playerColors = new Color[] { Color.red, Color.blue, Color.green, Color.yellow };
+    public bool useTextIndicators = true; // show TMP label like P1, P2 with color
+    [Header("Keyboard (Optional)")]
+    public bool useKeyboardAsPlayer = false; // controllers only by default
+
+    private readonly Dictionary<Gamepad, int> padToPlayer = new Dictionary<Gamepad, int>();
+    private Keyboard keyboard;
+    private int keyboardPlayerIndex = -1;
+    private readonly Dictionary<int, int> playerSelections = new Dictionary<int, int>();
+    private VerticalGradientImage[] playerIndicators = new VerticalGradientImage[4];
+    private TextMeshProUGUI[] playerLabels = new TextMeshProUGUI[4];
+    private float[] navCooldownX = new float[4];
+    private float[] navCooldownY = new float[4];
+
     private float votingTimer;
-    private bool votingActive = false;
-    private bool isTimerPulsing = false;
-    private int lastSecond = -1;
+    private bool votingActive;
+
+    private bool IsMapValid(int index)
+    {
+        if (index < 0 || index >= maps.Length) return false;
+        // ? TEMPORARY: Remove image requirement for testing
+        return maps[index] != null && !string.IsNullOrEmpty(maps[index].mapName);
+        // Original: return maps[index] != null && maps[index].mapImage != null;
+    }
+
+    private int WrapIndex(int index)
+    {
+        if (maps.Length == 0) return 0;
+        return (index % maps.Length + maps.Length) % maps.Length;
+    }
+
+    private int FindNextValidIndex(int start, Vector2 nav)
+    {
+        if (maps == null || maps.Length == 0) return 0;
+        int current = WrapIndex(start);
+        int attempts = maps.Length;
+        int step = 0;
+        if (nav.x > 0) step = 1;
+        else if (nav.x < 0) step = -1;
+        else if (nav.y > 0) step = -mapsPerRow;
+        else if (nav.y < 0) step = mapsPerRow;
+        if (step == 0) return current;
+        int candidate = current;
+        while (attempts-- > 0)
+        {
+            candidate = WrapIndex(candidate + step);
+            if (IsMapValid(candidate)) return candidate;
+        }
+        return current; // no valid move found
+    }
+
+    private Color GetPlayerColor(int playerId)
+    {
+        if (playerColors == null || playerColors.Length == 0) return Color.white;
+        int idx = Mathf.Abs(playerId) % playerColors.Length;
+        return playerColors[idx];
+    }
 
     void Start()
     {
-        SetupClickableImages();
-        
-        // Store and set timer pivot to center for proper scaling
-        if (timerText != null)
-        {
-            RectTransform timerRect = timerText.GetComponent<RectTransform>();
-            timerOriginalPivot = timerRect.pivot;
-            timerRect.pivot = new Vector2(0.5f, 0.5f);
-        }
-        
+        SetupControllers();
+        CreatePlayerIndicators();
         StartVoting();
     }
 
     void Update()
     {
-        if (votingActive)
-        {
-            votingTimer -= Time.deltaTime;
-            if (timerText != null)
-            {
-                int currentSecond = Mathf.CeilToInt(votingTimer);
-                timerText.text = currentSecond.ToString();
-                
-                // Change color to red when 5 seconds or less remaining
-                if (votingTimer <= 5f)
-                {
-                    timerText.color = Color.red;
-                    
-                    // Trigger pulse animation when second changes
-                    if (currentSecond != lastSecond && !isTimerPulsing)
-                    {
-                        StartCoroutine(PulseTimer());
-                    }
-                }
-                else
-                {
-                    timerText.color = Color.white;
-                }
-                
-                lastSecond = currentSecond;
-            }
+        if (!votingActive) return;
 
-            if (votingTimer <= 0)
-            {
-                EndVoting();
-            }
+        votingTimer -= Time.deltaTime;
+        if (timerText != null)
+        {
+            int t = Mathf.CeilToInt(votingTimer);
+            timerText.text = t.ToString();
+        }
+
+        HandleControllerInput();
+
+        if (votingTimer <= 0f)
+        {
+            EndVoting();
         }
     }
 
-    void SetupClickableImages()
-    {
-        for (int i = 0; i < maps.Length; i++)
-        {
-            if (maps[i].mapImage != null)
-            {
-                int index = i;
-                AddClickListener(maps[i].mapImage.gameObject, () => VoteForMap(index));
-            }
-        }
-
-        if (randomOption != null && randomOption.mapImage != null)
-        {
-            AddClickListener(randomOption.mapImage.gameObject, () => VoteForRandom());
-        }
-    }
-
-    void AddClickListener(GameObject obj, System.Action callback)
-    {
-        EventTrigger trigger = obj.GetComponent<EventTrigger>();
-        if (trigger == null)
-        {
-            trigger = obj.AddComponent<EventTrigger>();
-        }
-
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((data) => { callback(); });
-        trigger.triggers.Add(entry);
-    }
-
-    public void StartVoting()
+    void StartVoting()
     {
         votingActive = true;
         votingTimer = votingDuration;
 
-        foreach (var map in maps)
+        // Initialize players to the first map and show indicators
+        foreach (var kv in padToPlayer)
         {
-            map.votes = 0;
-            UpdateVoteDisplay(map);
+            int p = kv.Value;
+            int initial = 0;
+            if (!IsMapValid(initial)) initial = FindNextValidIndex(initial, Vector2.right);
+            playerSelections[p] = initial;
+            PositionIndicatorOnMap(p, initial);
+            SetIndicatorColor(p, GetPlayerColor(p), 0.7f);
         }
-        if (randomOption != null)
+        if (keyboardPlayerIndex >= 0)
         {
-            randomOption.votes = 0;
-            UpdateVoteDisplay(randomOption);
-        }
-
-        playerVotes.Clear();
-    }
-
-    public void VoteForMap(int mapIndex, int playerId = 0)
-    {
-        if (!votingActive) return;
-
-        if (playerVotes.ContainsKey(playerId))
-        {
-            int previousVote = playerVotes[playerId];
-            if (previousVote == -1 && randomOption != null)
-            {
-                randomOption.votes--;
-                UpdateVoteDisplay(randomOption);
-            }
-            else if (previousVote >= 0 && previousVote < maps.Length)
-            {
-                maps[previousVote].votes--;
-                UpdateVoteDisplay(maps[previousVote]);
-            }
-        }
-
-        maps[mapIndex].votes++;
-        playerVotes[playerId] = mapIndex;
-        UpdateVoteDisplay(maps[mapIndex]);
-    }
-
-    public void VoteForRandom(int playerId = 0)
-    {
-        if (!votingActive || randomOption == null) return;
-
-        if (playerVotes.ContainsKey(playerId))
-        {
-            int previousVote = playerVotes[playerId];
-            if (previousVote == -1)
-            {
-                randomOption.votes--;
-                UpdateVoteDisplay(randomOption);
-            }
-            else if (previousVote >= 0 && previousVote < maps.Length)
-            {
-                maps[previousVote].votes--;
-                UpdateVoteDisplay(maps[previousVote]);
-            }
-        }
-
-        randomOption.votes++;
-        playerVotes[playerId] = -1;
-        UpdateVoteDisplay(randomOption);
-    }
-
-    void UpdateVoteDisplay(MapOption map)
-    {
-        if (map.voteCountText != null)
-        {
-            if (map.votes > 0)
-            {
-                map.voteCountText.text = map.votes.ToString();
-                map.voteCountText.gameObject.SetActive(true);
-            }
-            else
-            {
-                map.voteCountText.gameObject.SetActive(false);
-            }
+            int p = keyboardPlayerIndex;
+            int initial = 0;
+            if (!IsMapValid(initial)) initial = FindNextValidIndex(initial, Vector2.right);
+            playerSelections[p] = initial;
+            PositionIndicatorOnMap(p, initial);
+            SetIndicatorColor(p, GetPlayerColor(p), 0.7f);
         }
     }
 
@@ -208,178 +140,269 @@ public class MapSelect : MonoBehaviour
     {
         votingActive = false;
 
-        MapOption selectedMap = GetMapWithMostVotes();
-
-        if (selectedMap != null)
+        // Count selections per map index
+        int[] counts = new int[maps.Length];
+        foreach (var kv in playerSelections)
         {
-            if (selectedMap == randomOption)
-            {
-                int randomIndex = Random.Range(0, maps.Length);
-                selectedMap = maps[randomIndex];
-            }
-
-            if (selectedMapText != null)
-            {
-                selectedMapText.text = selectedMap.mapName;
-            }
-
-            Debug.Log("Selected Map: " + selectedMap.mapName);
-            
-            // Hide the timer
-            if (timerText != null)
-            {
-                timerText.gameObject.SetActive(false);
-            }
-            
-            // Move selected map to last sibling (renders on top), then hide others
-            if (selectedMap.mapImage != null)
-            {
-                selectedMap.mapImage.transform.SetAsLastSibling();
-                HideUnselectedMaps(selectedMap);
-                StartCoroutine(ZoomAndCenterMap(selectedMap.mapImage));
-            }
-            
-            LoadMap(selectedMap.mapName);
+            int sel = Mathf.Clamp(kv.Value, 0, maps.Length - 1);
+            counts[sel]++;
         }
-    }
 
-    void HideUnselectedMaps(MapOption selectedMap)
-    {
-        // Hide vote count for selected map
-        if (selectedMap.voteCountText != null)
+        // Find highest count
+        int winnerIdx = 0;
+        int max = counts.Length > 0 ? counts[0] : 0;
+        for (int i = 1; i < counts.Length; i++)
         {
-            selectedMap.voteCountText.gameObject.SetActive(false);
-        }
-        
-        foreach (var map in maps)
-        {
-            if (map != selectedMap && map.mapImage != null)
+            if (counts[i] > max)
             {
-                // Disable raycasts and make fully transparent
-                map.mapImage.raycastTarget = false;
-                CanvasGroup canvasGroup = map.mapImage.gameObject.GetComponent<CanvasGroup>();
-                if (canvasGroup == null)
+                max = counts[i];
+                winnerIdx = i;
+            }
+        }
+
+        if (winnerIdx >= 0 && winnerIdx < maps.Length && maps[winnerIdx] != null)
+        {
+            // ? FIXED: Use sceneName instead of mapName
+            string sceneName = !string.IsNullOrEmpty(maps[winnerIdx].sceneName) 
+                ? maps[winnerIdx].sceneName 
+                : maps[winnerIdx].mapName; // fallback to mapName if sceneName not set
+            
+            if (!string.IsNullOrEmpty(sceneName))
+            {
+                Debug.Log($"Loading map: {maps[winnerIdx].mapName} -> Scene: {sceneName}");
+                
+                // ? ADD: Store selected map in GameDataManager
+                if (GameDataManager.Instance != null)
                 {
-                    canvasGroup = map.mapImage.gameObject.AddComponent<CanvasGroup>();
+                    // Create a temporary MapData to store the selection
+                    MapData selectedMapData = ScriptableObject.CreateInstance<MapData>();
+                    selectedMapData.mapName = maps[winnerIdx].mapName;
+                    selectedMapData.sceneName = sceneName;
+                    
+                    GameDataManager.Instance.SetSelectedMap(selectedMapData);
+                    Debug.Log($"Stored selected map in GameDataManager: {maps[winnerIdx].mapName}");
                 }
-                canvasGroup.alpha = 0f;
-                canvasGroup.blocksRaycasts = false;
+                
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
             }
-        }
-        
-        if (randomOption != null && randomOption != selectedMap && randomOption.mapImage != null)
-        {
-            randomOption.mapImage.raycastTarget = false;
-            CanvasGroup canvasGroup = randomOption.mapImage.gameObject.GetComponent<CanvasGroup>();
-            if (canvasGroup == null)
+            else
             {
-                canvasGroup = randomOption.mapImage.gameObject.AddComponent<CanvasGroup>();
+                Debug.LogWarning("Winner has no scene name assigned.");
             }
-            canvasGroup.alpha = 0f;
-            canvasGroup.blocksRaycasts = false;
         }
     }
 
-    System.Collections.IEnumerator ZoomAndCenterMap(Image mapImage)
+    void SetupControllers()
     {
-        RectTransform rectTransform = mapImage.GetComponent<RectTransform>();
-        Vector3 originalPosition = rectTransform.position;
-        Vector3 originalScale = rectTransform.localScale;
-
-        // Get canvas center position
-        Vector3 canvasCenter = Vector3.zero;
-        if (canvas != null)
+        padToPlayer.Clear();
+        keyboard = Keyboard.current;
+        
+        // ? ENHANCED: Use character selection device mappings if available
+        if (NewCharacterSelectManager.Instance != null)
         {
-            RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-            canvasCenter = canvasRect.position;
-        }
-
-        float elapsed = 0f;
-
-        while (elapsed < zoomDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / zoomDuration;
+            var charSelectMappings = NewCharacterSelectManager.Instance.GetPadMappingsSnapshot();
+            Debug.Log($"MapSelect: Using character select device mappings: {charSelectMappings.Count} controllers");
             
-            // Smooth zoom and move to center
-            rectTransform.position = Vector3.Lerp(originalPosition, canvasCenter, t);
-            rectTransform.localScale = Vector3.Lerp(originalScale, originalScale * zoomScale, t);
-            
-            yield return null;
-        }
-
-        rectTransform.position = canvasCenter;
-        rectTransform.localScale = originalScale * zoomScale;
-    }
-
-    System.Collections.IEnumerator PulseTimer()
-    {
-        if (timerText == null) yield break;
-        
-        isTimerPulsing = true;
-        RectTransform rectTransform = timerText.GetComponent<RectTransform>();
-        Vector3 originalScale = rectTransform.localScale;
-        Vector3 originalPosition = rectTransform.anchoredPosition;
-        Color originalColor = timerText.color;
-        
-        float startScale = 3f; // Start very large
-        float elapsed = 0f;
-        
-        // Pop in large then shrink and fade
-        while (elapsed < timerPulseDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / timerPulseDuration;
-            
-            // Quick ease out for snappy feel
-            float easedT = 1f - Mathf.Pow(1f - t, 2f);
-            
-            // Scale from large to slightly smaller than normal
-            float currentScale = Mathf.Lerp(startScale, 0.8f, easedT);
-            rectTransform.localScale = originalScale * currentScale;
-            
-            // Fade out as it shrinks
-            Color color = originalColor;
-            color.a = Mathf.Lerp(1f, 0f, easedT);
-            timerText.color = color;
-            
-            yield return null;
-        }
-        
-        // Reset for next number
-        rectTransform.localScale = originalScale;
-        rectTransform.anchoredPosition = originalPosition;
-        timerText.color = originalColor;
-        
-        isTimerPulsing = false;
-    }
-
-    MapOption GetMapWithMostVotes()
-    {
-        MapOption winner = maps[0];
-        int maxVotes = maps[0].votes;
-
-        for (int i = 1; i < maps.Length; i++)
-        {
-            if (maps[i].votes > maxVotes)
+            foreach (var kv in charSelectMappings)
             {
-                maxVotes = maps[i].votes;
-                winner = maps[i];
+                padToPlayer[kv.Key] = kv.Value;
+            }
+            
+            // Use keyboard from character select if available
+            if (NewCharacterSelectManager.Instance.IsKeyboardJoined())
+            {
+                keyboardPlayerIndex = NewCharacterSelectManager.Instance.GetKeyboardPlayerIndex();
+            }
+        }
+        else
+        {
+            // Fallback: assign controllers sequentially
+            Debug.Log("MapSelect: Character select manager not found, using fallback controller assignment");
+            int idx = 0;
+            foreach (var pad in Gamepad.all)
+            {
+                if (idx >= 4) break;
+                padToPlayer[pad] = idx;
+                idx++;
+            }
+            
+            // Attach keyboard as next player if enabled and slot available
+            keyboardPlayerIndex = -1;
+            if (useKeyboardAsPlayer && keyboard != null && idx < 4)
+            {
+                keyboardPlayerIndex = idx;
+                idx++;
+            }
+        }
+        
+        for (int i = 0; i < 4; i++) { navCooldownX[i] = 0f; navCooldownY[i] = 0f; }
+    }
+
+    void HandleControllerInput()
+    {
+        foreach (var kv in padToPlayer)
+        {
+            var pad = kv.Key;
+            int playerId = kv.Value;
+
+            // Navigation input (D-pad)
+            Vector2 nav = Vector2.zero;
+            if (pad.dpad.left.wasPressedThisFrame) nav = Vector2.left;
+            else if (pad.dpad.right.wasPressedThisFrame) nav = Vector2.right;
+            else if (pad.dpad.up.wasPressedThisFrame) nav = Vector2.up;
+            else if (pad.dpad.down.wasPressedThisFrame) nav = Vector2.down;
+
+            // Left stick repeat
+            float h = pad.leftStick.x.ReadValue();
+            float v = pad.leftStick.y.ReadValue();
+            navCooldownX[playerId] = Mathf.Max(0f, navCooldownX[playerId] - Time.unscaledDeltaTime);
+            navCooldownY[playerId] = Mathf.Max(0f, navCooldownY[playerId] - Time.unscaledDeltaTime);
+            const float threshold = 0.6f;
+            if (Mathf.Abs(h) > threshold && navCooldownX[playerId] <= 0f)
+            {
+                nav.x = h > 0 ? 1f : -1f;
+                navCooldownX[playerId] = navRepeatDelay;
+            }
+            if (Mathf.Abs(v) > threshold && navCooldownY[playerId] <= 0f)
+            {
+                nav.y = v > 0 ? 1f : -1f;
+                navCooldownY[playerId] = navRepeatDelay;
+            }
+
+            if (nav != Vector2.zero)
+            {
+                int current = playerSelections.ContainsKey(playerId) ? playerSelections[playerId] : 0;
+                int next = FindNextValidIndex(current, nav);
+                playerSelections[playerId] = next;
+                PositionIndicatorOnMap(playerId, next);
+                SetIndicatorColor(playerId, GetPlayerColor(playerId), 0.7f);
+                
+                // ? ADD: Debug logging for navigation
+                Debug.Log($"Player {playerId + 1} navigated to map {next}: {maps[next].mapName}");
             }
         }
 
-        if (randomOption != null && randomOption.votes > maxVotes)
+        // Keyboard navigation (optional)
+        if (keyboardPlayerIndex >= 0 && keyboard != null)
         {
-            winner = randomOption;
-        }
+            int playerId = keyboardPlayerIndex;
+            Vector2 nav = Vector2.zero;
+            if (keyboard.leftArrowKey.wasPressedThisFrame || keyboard.aKey.wasPressedThisFrame) nav = Vector2.left;
+            else if (keyboard.rightArrowKey.wasPressedThisFrame || keyboard.dKey.wasPressedThisFrame) nav = Vector2.right;
+            else if (keyboard.upArrowKey.wasPressedThisFrame || keyboard.wKey.wasPressedThisFrame) nav = Vector2.up;
+            else if (keyboard.downArrowKey.wasPressedThisFrame || keyboard.sKey.wasPressedThisFrame) nav = Vector2.down;
 
-        return winner;
+            if (nav != Vector2.zero)
+            {
+                int current = playerSelections.ContainsKey(playerId) ? playerSelections[playerId] : 0;
+                int next = FindNextValidIndex(current, nav);
+                playerSelections[playerId] = next;
+                PositionIndicatorOnMap(playerId, next);
+                SetIndicatorColor(playerId, GetPlayerColor(playerId), 0.7f);
+                
+                // ? ADD: Debug logging for keyboard navigation
+                Debug.Log($"Player {playerId + 1} (keyboard) navigated to map {next}: {maps[next].mapName}");
+            }
+        }
     }
 
-    void LoadMap(string mapName)
+    void CreatePlayerIndicators()
     {
-        // Implement your map loading logic here
-        // For example: SceneManager.LoadScene(mapName);
-        Debug.Log("Loading map: " + mapName);
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject go = new GameObject($"Player{i + 1}Indicator");
+            var grad = go.AddComponent<VerticalGradientImage>();
+            grad.raycastTarget = false;
+            Color baseColor = i < playerColors.Length ? playerColors[i] : Color.white;
+            Color top = new Color(baseColor.r, baseColor.g, baseColor.b, 0.7f);
+            Color bottom = new Color(baseColor.r, baseColor.g, baseColor.b, 0f);
+            grad.SetColors(top, bottom);
+
+            var outline = go.AddComponent<Outline>();
+            outline.effectColor = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
+            outline.effectDistance = new Vector2(2f, -2f);
+            outline.useGraphicAlpha = true;
+
+            var rt = go.GetComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            playerIndicators[i] = grad;
+            go.SetActive(false);
+
+            if (useTextIndicators)
+            {
+                GameObject textObj = new GameObject($"Player{i + 1}Label");
+                var tmp = textObj.AddComponent<TextMeshProUGUI>();
+                tmp.text = $"P{i + 1}";
+                tmp.alignment = TextAlignmentOptions.Center;
+                tmp.fontSize = 20f; // requested size
+                tmp.enableAutoSizing = false;
+                tmp.color = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
+                tmp.textWrappingMode = TextWrappingModes.NoWrap;
+                tmp.verticalAlignment = VerticalAlignmentOptions.Middle;
+                var trt = textObj.GetComponent<RectTransform>();
+                trt.anchorMin = new Vector2(0.5f, 0.5f);
+                trt.anchorMax = new Vector2(0.5f, 0.5f);
+                trt.pivot = new Vector2(0.5f, 0.5f);
+                trt.localRotation = Quaternion.identity; // ensure not vertical/rotated
+                playerLabels[i] = tmp;
+                textObj.SetActive(false);
+            }
+        }
+    }
+
+    void PositionIndicatorOnMap(int playerId, int mapIndex)
+    {
+        if (playerId < 0 || playerId >= playerIndicators.Length) return;
+        if (!IsMapValid(mapIndex)) return;
+
+        var indicator = playerIndicators[playerId];
+        if (indicator == null) return;
+
+        var mapRect = maps[mapIndex].mapImage.GetComponent<RectTransform>();
+        var indRect = indicator.GetComponent<RectTransform>();
+
+        // Parent to the map image and fill it
+        if (indRect.parent != mapRect)
+            indRect.SetParent(mapRect, false);
+        indRect.anchorMin = Vector2.zero;
+        indRect.anchorMax = Vector2.one;
+        indRect.pivot = mapRect.pivot;
+        indRect.anchoredPosition = Vector2.zero;
+        indRect.sizeDelta = Vector2.zero;
+        indRect.localScale = Vector3.one;
+        indicator.transform.SetAsLastSibling();
+
+        indicator.gameObject.SetActive(true);
+
+        // Optional text label centered on the image
+        if (useTextIndicators && playerLabels[playerId] != null)
+        {
+            var label = playerLabels[playerId];
+            var lrt = label.GetComponent<RectTransform>();
+            if (lrt.parent != mapRect)
+                lrt.SetParent(mapRect, false);
+            lrt.anchorMin = new Vector2(0.5f, 0.5f);
+            lrt.anchorMax = new Vector2(0.5f, 0.5f);
+            lrt.pivot = new Vector2(0.5f, 0.5f);
+            lrt.anchoredPosition = Vector2.zero;
+            lrt.sizeDelta = Vector2.zero;
+            label.gameObject.SetActive(true);
+            // ensure label draws above overlay
+            label.transform.SetAsLastSibling();
+        }
+    }
+
+    void SetIndicatorColor(int playerId, Color c, float alpha)
+    {
+        if (playerId < 0 || playerId >= playerIndicators.Length) return;
+        var grad = playerIndicators[playerId];
+        if (grad == null) return;
+        Color top = new Color(c.r, c.g, c.b, alpha);
+        Color bottom = new Color(c.r, c.g, c.b, 0f);
+        grad.SetColors(top, bottom);
+        var outline = grad.GetComponent<Outline>();
+        if (outline != null) outline.effectColor = new Color(c.r, c.g, c.b, 1f);
     }
 }

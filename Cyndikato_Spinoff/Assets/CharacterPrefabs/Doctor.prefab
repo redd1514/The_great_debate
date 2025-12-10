@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3698024070262315643}
   - component: {fileID: 7979104015455388469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightAttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 120634229666003482}
   - component: {fileID: 8815308956858199265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeavyAttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,8 @@ GameObject:
   - component: {fileID: 2699941961677000380}
   - component: {fileID: 1051420602535170615}
   - component: {fileID: 3853134872806027275}
-  m_Layer: 0
+  - component: {fileID: 5557525758886790883}
+  m_Layer: 6
   m_Name: Doctor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _animator: {fileID: 1051420602535170615}
   playerNumber: 1
-  inputActions: {fileID: 0}
+  inputActions: {fileID: -944628639613478452, guid: 977f7456eb06f6f4299ceae65f5dc8c5, type: 3}
   moveSpeed: 8
   jumpForce: 10
   airSpeed: 6
@@ -372,6 +373,8 @@ MonoBehaviour:
   lightAttackAnimationDuration: 0.5
   heavyAttackAnimationDuration: 0.7
   groundDistance: 0.3
+  jumpPlaySpeed: 0.85
+  jumpHoldThreshold: 0.95
   knockbackLockTimer: 0
   platformDropForce: -5
   dropCooldown: 0.2
@@ -385,6 +388,7 @@ MonoBehaviour:
   projectileSpeed: 18
   projectileLifetime: 3
   projectileCooldown: 0.5
+  projectileKnockback: 30
   showPlayerLabel: 1
   playerLabelOffset: {x: 0, y: 0.8, z: 0}
   playerLabelPadding: 0.15
@@ -406,3 +410,33 @@ MonoBehaviour:
   isEliminated: 0
   requireController: 1
   allowPlayer1KeyboardFallback: 1
+--- !u!114 &5557525758886790883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348566150702923270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 977f7456eb06f6f4299ceae65f5dc8c5, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: New Control Scheme
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

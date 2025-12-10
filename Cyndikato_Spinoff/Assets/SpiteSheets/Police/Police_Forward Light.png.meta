@@ -1,0 +1,780 @@
+fileFormatVersion: 2
+guid: 70d9676c07a03ec40b01812ddbc747be
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7119533247907205110
+    second: Police_Forward Light_0
+  - first:
+      213: 827942836830562187
+    second: Police_Forward Light_1
+  - first:
+      213: 6801285830733428226
+    second: Police_Forward Light_2
+  - first:
+      213: -5630902490459175545
+    second: Police_Forward Light_3
+  - first:
+      213: 3836720289440199898
+    second: Police_Forward Light_4
+  - first:
+      213: 6623286626070461682
+    second: Police_Forward Light_5
+  - first:
+      213: -2553575699405966233
+    second: Police_Forward Light_6
+  - first:
+      213: -3811854961931425318
+    second: Police_Forward Light_7
+  - first:
+      213: 3182510504695678346
+    second: Police_Forward Light_8
+  - first:
+      213: 1104615466154448561
+    second: Police_Forward Light_9
+  - first:
+      213: -2881581880173671304
+    second: Police_Forward Light_10
+  - first:
+      213: 8506046592605882407
+    second: Police_Forward Light_11
+  - first:
+      213: -4531242528501853288
+    second: Police_Forward Light_12
+  - first:
+      213: 2330591966813501228
+    second: Police_Forward Light_13
+  - first:
+      213: -5849601639589584604
+    second: Police_Forward Light_14
+  - first:
+      213: 3337623192157816265
+    second: Police_Forward Light_15
+  - first:
+      213: -2265015441903503372
+    second: Police_Forward Light_16
+  - first:
+      213: -7246798694601102437
+    second: Police_Forward Light_17
+  - first:
+      213: 5016443550340933001
+    second: Police_Forward Light_18
+  - first:
+      213: -7706005251468327749
+    second: Police_Forward Light_19
+  - first:
+      213: 3285898727931254952
+    second: Police_Forward Light_20
+  - first:
+      213: 5914131031473801840
+    second: Police_Forward Light_21
+  - first:
+      213: 6906560348279984540
+    second: Police_Forward Light_22
+  - first:
+      213: 6687911842387981433
+    second: Police_Forward Light_23
+  - first:
+      213: 4087424225953805562
+    second: Police_Forward Light_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Police_Forward Light_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 50
+        width: 316
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0078ef5b36523d90800000000000000
+      internalID: -7119533247907205110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_1
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 79
+        width: 296
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b876d9b9f917d7b00800000000000000
+      internalID: 827942836830562187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_2
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 49
+        width: 327
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20673c4ad65036e50800000000000000
+      internalID: 6801285830733428226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_3
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 43
+        width: 310
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 785815bc4040bd1b0800000000000000
+      internalID: -5630902490459175545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_4
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 42
+        width: 64
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad4fd9286c4ce3530800000000000000
+      internalID: 3836720289440199898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_5
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 44
+        width: 270
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc76804814aaeb50800000000000000
+      internalID: 6623286626070461682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_6
+      rect:
+        serializedVersion: 2
+        x: 2063
+        y: 44
+        width: 270
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76476d94e60ef8cd0800000000000000
+      internalID: -2553575699405966233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_7
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 44
+        width: 270
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad964c2bb12991bc0800000000000000
+      internalID: -3811854961931425318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_8
+      rect:
+        serializedVersion: 2
+        x: 2889
+        y: 44
+        width: 270
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a85c55e317c8a2c20800000000000000
+      internalID: 3182510504695678346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_9
+      rect:
+        serializedVersion: 2
+        x: 3258
+        y: 46
+        width: 261
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6d989f9e1645f00800000000000000
+      internalID: 1104615466154448561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_10
+      rect:
+        serializedVersion: 2
+        x: 3668
+        y: 46
+        width: 261
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87ccb091c809208d0800000000000000
+      internalID: -2881581880173671304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_11
+      rect:
+        serializedVersion: 2
+        x: 4081
+        y: 46
+        width: 261
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 728023b1f4c8b0670800000000000000
+      internalID: 8506046592605882407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_12
+      rect:
+        serializedVersion: 2
+        x: 4457
+        y: 50
+        width: 218
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89311898deacd11c0800000000000000
+      internalID: -4531242528501853288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_13
+      rect:
+        serializedVersion: 2
+        x: 4871
+        y: 50
+        width: 218
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c273c4abb0de75020800000000000000
+      internalID: 2330591966813501228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_14
+      rect:
+        serializedVersion: 2
+        x: 5241
+        y: 50
+        width: 356
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42168b22d4a02dea0800000000000000
+      internalID: -5849601639589584604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_15
+      rect:
+        serializedVersion: 2
+        x: 5638
+        y: 50
+        width: 355
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c50caa1c9e915e20800000000000000
+      internalID: 3337623192157816265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_16
+      rect:
+        serializedVersion: 2
+        x: 6044
+        y: 50
+        width: 356
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f73196c47c0190e0800000000000000
+      internalID: -2265015441903503372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_17
+      rect:
+        serializedVersion: 2
+        x: 6445
+        y: 50
+        width: 356
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9b69818bf23e6b90800000000000000
+      internalID: -7246798694601102437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_18
+      rect:
+        serializedVersion: 2
+        x: 6838
+        y: 49
+        width: 356
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985eedda4dcfd9540800000000000000
+      internalID: 5016443550340933001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_19
+      rect:
+        serializedVersion: 2
+        x: 7236
+        y: 51
+        width: 356
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb48fec4d05ce0590800000000000000
+      internalID: -7706005251468327749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_20
+      rect:
+        serializedVersion: 2
+        x: 7641
+        y: 47
+        width: 330
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a8104ecb7bd99d20800000000000000
+      internalID: 3285898727931254952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_21
+      rect:
+        serializedVersion: 2
+        x: 8056
+        y: 44
+        width: 287
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a4c16b6d6331250800000000000000
+      internalID: 5914131031473801840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_22
+      rect:
+        serializedVersion: 2
+        x: 8449
+        y: 49
+        width: 246
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c91d6035b0809df50800000000000000
+      internalID: 6906560348279984540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_23
+      rect:
+        serializedVersion: 2
+        x: 8867
+        y: 50
+        width: 225
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974f9a6f26c30dc50800000000000000
+      internalID: 6687911842387981433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_Forward Light_24
+      rect:
+        serializedVersion: 2
+        x: 9228
+        y: 54
+        width: 314
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af47d4a6da279b830800000000000000
+      internalID: 4087424225953805562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Police_Forward Light_0: -7119533247907205110
+      Police_Forward Light_1: 827942836830562187
+      Police_Forward Light_10: -2881581880173671304
+      Police_Forward Light_11: 8506046592605882407
+      Police_Forward Light_12: -4531242528501853288
+      Police_Forward Light_13: 2330591966813501228
+      Police_Forward Light_14: -5849601639589584604
+      Police_Forward Light_15: 3337623192157816265
+      Police_Forward Light_16: -2265015441903503372
+      Police_Forward Light_17: -7246798694601102437
+      Police_Forward Light_18: 5016443550340933001
+      Police_Forward Light_19: -7706005251468327749
+      Police_Forward Light_2: 6801285830733428226
+      Police_Forward Light_20: 3285898727931254952
+      Police_Forward Light_21: 5914131031473801840
+      Police_Forward Light_22: 6906560348279984540
+      Police_Forward Light_23: 6687911842387981433
+      Police_Forward Light_24: 4087424225953805562
+      Police_Forward Light_3: -5630902490459175545
+      Police_Forward Light_4: 3836720289440199898
+      Police_Forward Light_5: 6623286626070461682
+      Police_Forward Light_6: -2553575699405966233
+      Police_Forward Light_7: -3811854961931425318
+      Police_Forward Light_8: 3182510504695678346
+      Police_Forward Light_9: 1104615466154448561
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

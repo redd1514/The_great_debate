@@ -11,6 +11,11 @@ using TMPro;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
+    // Only allow one projectile throw per game
+    private bool hasThrownProjectile = false;
+    private int ignoreCollisionFrames = 10;
+    private int ignoreCollisionCounter = 0;
+    private PlayerInput playerInput;
     [SerializeField] private Animator _animator;
     [SerializeField] private int playerNumber = 1; // 1, 2, 3, or 4
     [SerializeField] private InputActionAsset inputActions; // Reference to PlayerControls.inputactions
@@ -57,6 +62,12 @@ public class PlayerController : MonoBehaviour
     
     [Header("Setup")]
     public float groundDistance = 0.3f;
+    
+    [Header("Animation Tuning")]
+    [Tooltip("Playback speed multiplier while in jump state before hold.")]
+    public float jumpPlaySpeed = 0.85f;
+    [Tooltip("Normalized time at which to start holding last frame while airborne (0..1).")]
+    [Range(0.8f, 1f)] public float jumpHoldThreshold = 0.95f;
     
     // State
     private Rigidbody2D rb;
@@ -154,6 +165,8 @@ public class PlayerController : MonoBehaviour
     private float invulnTimer;
     private bool isRespawning; // True during delay window
     private bool initialFacingRight; // Stores default facing established at Start
+    // Jump animation hold tracking
+    private bool jumpHoldApplied = false;
 
     // Controller gating
     [Header("Controller Activation")] public bool requireController = true; // If true, player only active with a paired gamepad (except fallback rules)
@@ -166,28 +179,54 @@ public class PlayerController : MonoBehaviour
     // Ensure InputUser exists before OnEnable triggers pairing logic
     void Awake()
     {
-        if (playerControls == null)
-        {
-            playerControls = new PlayerControls();
-        }
-        if (!inputUser.valid)
-        {
-            inputUser = InputUser.CreateUserWithoutPairedDevices();
-            inputUser.AssociateActionsWithUser(playerControls);
-        }
+        // No manual PlayerControls or InputUser setup needed; PlayerInput handles this
     }
     
     void Start()
     {
+        ignoreCollisionCounter = 0;
+        playerInput = GetComponent<PlayerInput>();
+        // --- Player Label Creation ---
+        if (showPlayerLabel)
+        {
+            // Try to find existing label in children
+            playerLabel = GetComponentInChildren<TextMeshPro>();
+            if (playerLabel == null)
+            {
+                // Create label GameObject
+                GameObject labelObj = new GameObject("PlayerLabel");
+                labelObj.transform.SetParent(transform);
+                labelObj.transform.localPosition = playerLabelOffset;
+                playerLabel = labelObj.AddComponent<TextMeshPro>();
+                playerLabel.alignment = TextAlignmentOptions.Center;
+                playerLabel.fontSize = 4.5f;
+                playerLabel.color = GetColorForPlayer(playerInput != null ? playerInput.playerIndex + 1 : playerNumber);
+                playerLabel.text = playerInput != null ? $"P{playerInput.playerIndex + 1}" : $"P{playerNumber}";
+                playerLabel.sortingOrder = 100;
+            }
+            // Create shadow for readability
+            if (playerLabelShadow == null)
+            {
+                GameObject shadowObj = new GameObject("PlayerLabelShadow");
+                shadowObj.transform.SetParent(playerLabel.transform.parent);
+                shadowObj.transform.localPosition = playerLabel.transform.localPosition + new Vector3(0.03f, -0.03f, 0f);
+                playerLabelShadow = shadowObj.AddComponent<TextMeshPro>();
+                playerLabelShadow.alignment = TextAlignmentOptions.Center;
+                playerLabelShadow.fontSize = playerLabel.fontSize;
+                playerLabelShadow.color = new Color(0,0,0,0.7f);
+                playerLabelShadow.text = playerLabel.text;
+                playerLabelShadow.sortingOrder = 99;
+                // Ensure shadow is rendered behind
+                shadowObj.transform.SetSiblingIndex(0);
+            }
+        }
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravity;
-        
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
         }
-        
         if (_animator == null)
         {
             _animator = GetComponent<Animator>();
@@ -197,57 +236,69 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log($"[Player {playerNumber}] Animator already assigned in Inspector.");
         }
-        // InputSystem already initialized in Awake; ensure still valid
-        if (!inputUser.valid)
+        // Update label text and color if label exists (after playerInput is set)
+        if (showPlayerLabel && playerLabel != null && playerInput != null)
         {
-            inputUser = InputUser.CreateUserWithoutPairedDevices();
-            inputUser.AssociateActionsWithUser(playerControls);
+            playerLabel.text = $"P{playerInput.playerIndex + 1}";
+            playerLabel.color = GetColorForPlayer(playerInput.playerIndex + 1);
+            if (playerLabelShadow != null)
+                playerLabelShadow.text = playerLabel.text;
         }
-
-        var pads = Gamepad.all;
-        if (requireController && pads.Count < playerNumber)
+        // Use PlayerInput's assigned actions (action map is set by PlayerInput.Instantiate)
+        InputActionMap map = null;
+        if (playerInput != null)
         {
-            // Player 1 can still stay for keyboard fallback
-            if (playerNumber == 1 && allowPlayer1KeyboardFallback)
+            map = playerInput.currentActionMap;
+            if (map == null)
             {
-                hasGamepad = false; // keyboard only
-                Debug.LogWarning("[Player 1] No controller found. Using keyboard fallback.");
-            }
-            else
-            {
-                Debug.LogWarning($"[Player {playerNumber}] No controller found. Destroying player instance.");
-                Destroy(gameObject);
-                return; // Abort further initialization; OnDisable will clean from lists
+                // Set the correct action map based on player index
+                string mapName = $"Player{playerInput.playerIndex + 1}Controls";
+                map = playerInput.actions.FindActionMap(mapName, true);
+                if (map != null)
+                {
+                    playerInput.SwitchCurrentActionMap(mapName);
+                    Debug.Log($"[PlayerController] Switched to action map: {mapName}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[PlayerController] Could not find action map: {mapName}");
+                }
             }
         }
-        if (pads.Count >= playerNumber)
+        if (map != null)
         {
-            InputUser.PerformPairingWithDevice(pads[playerNumber - 1], inputUser);
-            hasGamepad = true;
-            Debug.Log($"[Player {playerNumber}] Paired with gamepad: {pads[playerNumber - 1].displayName}");
+            moveAction = map.FindAction("Move");
+            jumpAction = map.FindAction("Jump");
+            dashAction = map.FindAction("Dash");
+            lightAttackAction = map.FindAction("LightAttack");
+            heavyAttackAction = map.FindAction("HeavyAttack");
+            map.Enable();
+            Debug.Log($"[PlayerController] Using action map: {map.name}");
         }
         else
         {
-            hasGamepad = false;
-            Debug.LogWarning($"[Player {playerNumber}] No gamepad available yet. Waiting for connection.");
+            Debug.LogWarning("[PlayerController] No action map found for this player!");
         }
-
-        // Use Player1Controls for all players (other maps currently have only placeholder actions)
-        var m = playerControls.Player1Controls;
-        m.Enable();
-        moveAction = m.Move;
-        jumpAction = m.Jump;
-        dashAction = m.Dash;
-        lightAttackAction = m.LightAttack;
-        heavyAttackAction = m.HeavyAttack;
-
         // Cache initial spawn position
         spawnPosition = transform.position;
-
-        Debug.Log($"[Player {playerNumber}] Input System initialized; using Player1Controls for actions");
-
+        Debug.Log($"[Player {playerNumber}] Input System initialized; using action map: {(map != null ? map.name : "none")}");
+        // Ignore collisions with other players' box colliders so players don't bump into each other
+        BoxCollider2D myBox = GetComponent<BoxCollider2D>();
+        if (myBox != null)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player == this.gameObject) continue;
+                BoxCollider2D otherBox = player.GetComponent<BoxCollider2D>();
+                if (otherBox != null)
+                {
+                    Physics2D.IgnoreCollision(myBox, otherBox);
+                }
+            }
+        }
         // Default facing: Players 2 and 4 start facing left
-        if (playerNumber == 2 || playerNumber == 4)
+        if (playerInput != null && (playerInput.playerIndex == 1 || playerInput.playerIndex == 3)) // 0-based index
         {
             if (facingRight) // Flip only if currently facing right
             {
@@ -256,37 +307,33 @@ public class PlayerController : MonoBehaviour
         }
         // Cache the default facing after any initial flips
         initialFacingRight = facingRight;
-
-        if (showPlayerLabel)
-        {
-            // Create main label
-            var go = new GameObject("PlayerNumberLabel");
-            go.transform.SetParent(transform);
-            go.transform.localPosition = playerLabelOffset;
-            playerLabel = go.AddComponent<TextMeshPro>();
-            playerLabel.fontSize = 3f;
-            playerLabel.alignment = TextAlignmentOptions.Center;
-            playerLabel.enableAutoSizing = false;
-            playerLabel.color = GetColorForPlayer(playerNumber);
-            playerLabel.sortingOrder = 20;
-            playerLabel.text = "P" + playerNumber;
-
-            // Create drop shadow
-            var sh = new GameObject("PlayerNumberShadow");
-            sh.transform.SetParent(transform);
-            sh.transform.localPosition = playerLabelOffset + new Vector3(0.03f, -0.03f, 0f);
-            playerLabelShadow = sh.AddComponent<TextMeshPro>();
-            playerLabelShadow.fontSize = playerLabel.fontSize;
-            playerLabelShadow.alignment = TextAlignmentOptions.Center;
-            playerLabelShadow.enableAutoSizing = false;
-            playerLabelShadow.color = new Color(0f, 0f, 0f, 0.7f);
-            playerLabelShadow.sortingOrder = 19;
-            playerLabelShadow.text = playerLabel.text;
-        }
+    // End of Start()
     }
     
     void Update()
     {
+        // Robustly ignore collisions between all non-trigger colliders of all players
+        if (ignoreCollisionCounter < ignoreCollisionFrames)
+        {
+            var myColliders = GetComponents<Collider2D>();
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player == this.gameObject) continue;
+                var otherColliders = player.GetComponents<Collider2D>();
+                foreach (var myCol in myColliders)
+                {
+                    if (myCol.isTrigger) continue;
+                    foreach (var otherCol in otherColliders)
+                    {
+                        if (otherCol.isTrigger) continue;
+                        Physics2D.IgnoreCollision(myCol, otherCol);
+                    }
+                }
+            }
+            ignoreCollisionCounter++;
+        }
+
         CheckGround();
         UpdateTimers();
 
@@ -314,12 +361,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Fire projectile when Light + Heavy are pressed simultaneously (one-shot with cooldown)
-        if (projectilePrefab != null && projectileCooldownTimer <= 0f &&
+        if (!hasThrownProjectile && projectilePrefab != null && projectileCooldownTimer <= 0f &&
             ((lightAttackAction != null && lightAttackAction.IsPressed()) || (playerNumber == 1 && Keyboard.current != null && (Keyboard.current.jKey.isPressed || Keyboard.current.zKey.isPressed))) &&
             ((heavyAttackAction != null && heavyAttackAction.IsPressed()) || (playerNumber == 1 && Keyboard.current != null && (Keyboard.current.kKey.isPressed || Keyboard.current.xKey.isPressed))))
         {
             SpawnProjectile();
             projectileCooldownTimer = projectileCooldown;
+            hasThrownProjectile = true;
         }
 
         // Platform drop: only Down button (keyboard S or gamepad stick down)
@@ -345,21 +393,23 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (!isDashing)
+        // Only allow dash logic while dashing
+        if (isDashing)
         {
-            Move();
-            Jump();
-            Dash();
-            Attack();
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(facingRight ? dashSpeed : -dashSpeed, rb.linearVelocity.y);
+            var dashVel = new Vector2(facingRight ? dashSpeed : -dashSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = dashVel;
+            Debug.Log($"[Player {playerNumber}] Dash velocity set to: {dashVel}, Rigidbody2D velocity: {rb.linearVelocity}");
             if (_animator != null)
             {
                 _animator.SetBool("IsDash", true);
             }
+            // Skip all other movement, jump, and attack logic while dashing
+            return;
         }
+        Move();
+        Jump();
+        Dash();
+        Attack();
 
         UpdateAnimations();
 
@@ -429,8 +479,7 @@ public class PlayerController : MonoBehaviour
         isDropping = false;
         currentDropPlatform = null;
     }
-    public bool IsDropping() => isDropping;
-    public bool IsInvulnerable() => isInvulnerable;
+    bool IsDropping() => isDropping;
     
     void CheckGround()
     {
@@ -578,6 +627,9 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 jumps = 1; // First jump used
                 _animator.SetBool("IsJump", true);
+                // Prepare jump animation playback & reset hold state
+                jumpHoldApplied = false;
+                _animator.speed = Mathf.Max(0.01f, jumpPlaySpeed);
             }
             else if (jumps < maxJumps)
             {
@@ -585,6 +637,9 @@ public class PlayerController : MonoBehaviour
                 jumps++;
                 // Restart the jump animation by toggling it off and back on with a delay
                 StartCoroutine(RestartJumpAnimation());
+                // Reset hold state for in-air jump
+                jumpHoldApplied = false;
+                _animator.speed = Mathf.Max(0.01f, jumpPlaySpeed);
             }
         }
     }
@@ -611,7 +666,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Spawn a projectile in the facing direction
-    public void SpawnProjectile()
+    void SpawnProjectile()
     {
         if (projectilePrefab == null) return;
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + new Vector3(facingRight ? 0.6f : -0.6f, 0.35f, 0f);
@@ -898,8 +953,9 @@ public class PlayerController : MonoBehaviour
     {
         HandleDeath();
     }
+    public bool IsInvulnerable() => isInvulnerable;
 
-    private void HandleDeath()
+    void HandleDeath()
     {
         if (!enableRespawn || isRespawning || isEliminated)
         {
@@ -922,7 +978,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    void Respawn()
     {
         // Reset physics
         rb.linearVelocity = Vector2.zero;
@@ -976,7 +1032,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"[Player {playerNumber}] Respawned at {transform.position}");
     }
 
-    private IEnumerator RespawnAfterDelay()
+    System.Collections.IEnumerator RespawnAfterDelay()
     {
         isRespawning = true;
         // Disable visuals & collider during delay (optional fade could be added later)
@@ -991,7 +1047,7 @@ public class PlayerController : MonoBehaviour
         isRespawning = false;
     }
 
-    private void Eliminate()
+    void Eliminate()
     {
         isEliminated = true;
         enableRespawn = false;
@@ -1104,6 +1160,32 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsLightAttack", false);
         }
 
+        // Jump animation control: slow playback and hold last frame while airborne
+        bool jumpFlag = _animator.GetBool("IsJump");
+        if (jumpFlag && !isGrounded)
+        {
+            var st = _animator.GetCurrentAnimatorStateInfo(0);
+            // If nearing end of jump clip, freeze animator to hold the pose
+            if (!jumpHoldApplied && st.normalizedTime >= jumpHoldThreshold)
+            {
+                _animator.speed = 0f;
+                jumpHoldApplied = true;
+            }
+            else
+            {
+                _animator.speed = Mathf.Max(0.01f, jumpPlaySpeed);
+            }
+        }
+        else
+        {
+            // Restore normal speed when grounded or not in jump
+            if (_animator.speed != 1f)
+            {
+                _animator.speed = 1f;
+            }
+            jumpHoldApplied = false;
+        }
+
         // Update label visibility & (optional) dynamic height with smoothing
         if (showPlayerLabel && playerLabel != null)
         {
@@ -1140,15 +1222,27 @@ public class PlayerController : MonoBehaviour
     // Input abstraction methods - these support both keyboard and gamepad
     float GetMoveInput()
     {
-        if (playerControls == null)
-            return 0f;
-
-        // Primary: use Input System action
-        if (moveAction != null)
+        if (moveAction == null)
         {
-            Vector2 moveValue = moveAction.ReadValue<Vector2>();
-            if (Mathf.Abs(moveValue.x) > 0.001f) return moveValue.x;
+            Debug.LogWarning($"[Player {playerNumber}] moveAction is null!");
+            return 0f;
         }
+        if (!moveAction.enabled)
+        {
+            Debug.LogWarning($"[Player {playerNumber}] moveAction is not enabled!");
+            return 0f;
+        }
+        Vector2 moveValue = Vector2.zero;
+        try
+        {
+            moveValue = moveAction.ReadValue<Vector2>();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[Player {playerNumber}] Exception reading moveAction: {ex.Message}");
+        }
+        Debug.Log($"[Player {playerNumber}] moveAction value: {moveValue}");
+        if (Mathf.Abs(moveValue.x) > 0.001f) return moveValue.x;
 
         // Fallback for Player 1: keyboard A/D or Left/Right arrows
         if (playerNumber == 1 && Keyboard.current != null)
@@ -1164,9 +1258,6 @@ public class PlayerController : MonoBehaviour
     
     bool GetJumpInput()
     {
-        if (playerControls == null)
-            return false;
-
         if (jumpAction != null && jumpAction.WasPressedThisFrame()) return true;
 
         // Fallback for Player 1: space or up arrow
@@ -1194,9 +1285,6 @@ public class PlayerController : MonoBehaviour
     
     bool GetLightAttackInput()
     {
-        if (playerControls == null)
-            return false;
-
         if (lightAttackAction != null && lightAttackAction.WasPressedThisFrame()) return true;
 
         // Fallback for Player 1: J key or Z
@@ -1209,9 +1297,6 @@ public class PlayerController : MonoBehaviour
     
     bool GetHeavyAttackInput()
     {
-        if (playerControls == null)
-            return false;
-
         if (heavyAttackAction != null && heavyAttackAction.WasPressedThisFrame()) return true;
 
         // Fallback for Player 1: K key or X
@@ -1248,7 +1333,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetRespawnPoint(Transform t)
+    void SetRespawnPoint(Transform t)
     {
         respawnPoint = t;
         if (t != null)
@@ -1257,7 +1342,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetSpawnPosition(Vector3 pos)
+    void SetSpawnPosition(Vector3 pos)
     {
         spawnPosition = pos;
     }
@@ -1265,6 +1350,12 @@ public class PlayerController : MonoBehaviour
     // --- Controller dynamic pairing support ---
     void OnEnable()
     {
+        // Ensure this GameObject is always tagged as 'Player' at runtime
+        if (gameObject.tag != "Player")
+        {
+            Debug.LogWarning($"[PlayerController] GameObject '{gameObject.name}' did not have 'Player' tag. Setting it now.");
+            gameObject.tag = "Player";
+        }
         if (!allPlayers.Contains(this)) allPlayers.Add(this);
         InputSystem.onDeviceChange += OnDeviceChange;
         TryAssignUnpairedGamepads();
@@ -1276,13 +1367,13 @@ public class PlayerController : MonoBehaviour
         InputSystem.onDeviceChange -= OnDeviceChange;
     }
 
-    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    void OnDeviceChange(UnityEngine.InputSystem.InputDevice device, UnityEngine.InputSystem.InputDeviceChange change)
     {
-        if (device is Gamepad && (change == InputDeviceChange.Added || change == InputDeviceChange.Reconnected))
+        if (device is Gamepad && (change == UnityEngine.InputSystem.InputDeviceChange.Added || change == UnityEngine.InputSystem.InputDeviceChange.Reconnected))
         {
             TryAssignUnpairedGamepads();
         }
-        if (device is Gamepad && (change == InputDeviceChange.Removed || change == InputDeviceChange.Disconnected))
+        if (device is Gamepad && (change == UnityEngine.InputSystem.InputDeviceChange.Removed || change == UnityEngine.InputSystem.InputDeviceChange.Disconnected))
         {
             // Mark players using this pad as inactive
             foreach (var pc in allPlayers)
@@ -1291,7 +1382,7 @@ public class PlayerController : MonoBehaviour
                 {
                     foreach (var d in pc.inputUser.pairedDevices)
                     {
-                        if (d == device)
+                        if (ReferenceEquals(d, device))
                         {
                             pc.hasGamepad = false;
                             Debug.Log($"[Player {pc.playerNumber}] Gamepad disconnected. Player inactive until new pad pairs.");
@@ -1304,12 +1395,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private static void TryAssignUnpairedGamepads()
+    static void TryAssignUnpairedGamepads()
     {
         var pads = Gamepad.all;
         if (pads.Count == 0) return;
         // Collect used pads
-        var used = new System.Collections.Generic.HashSet<InputDevice>();
+        var used = new System.Collections.Generic.HashSet<UnityEngine.InputSystem.InputDevice>();
         foreach (var pc in allPlayers)
         {
             if (pc != null && pc.hasGamepad && pc.inputUser.valid)
@@ -1349,7 +1440,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Color GetColorForPlayer(int number)
+    Color GetColorForPlayer(int number)
     {
         switch (number)
         {

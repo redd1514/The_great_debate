@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: beef8ae49760f0944987ba4e943c7ed4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1950121320033508226
+    second: Accomplice Heavy Attack_0
+  - first:
+      213: -2114978968248961077
+    second: Accomplice Heavy Attack_1
+  - first:
+      213: 221625251640875972
+    second: Accomplice Heavy Attack_2
+  - first:
+      213: -1961776347345974989
+    second: Accomplice Heavy Attack_3
+  - first:
+      213: 3394043910982927051
+    second: Accomplice Heavy Attack_4
+  - first:
+      213: -3943820146693930017
+    second: Accomplice Heavy Attack_5
+  - first:
+      213: 3983937508830716381
+    second: Accomplice Heavy Attack_6
+  - first:
+      213: -3026920914213756377
+    second: Accomplice Heavy Attack_7
+  - first:
+      213: -110730896056279056
+    second: Accomplice Heavy Attack_8
+  - first:
+      213: -7019078086601862505
+    second: Accomplice Heavy Attack_9
+  - first:
+      213: -2176403066378135505
+    second: Accomplice Heavy Attack_10
+  - first:
+      213: -5193248521140221649
+    second: Accomplice Heavy Attack_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 48
+        width: 270
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e74ac7addf6cfe4e0800000000000000
+      internalID: -1950121320033508226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_1
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 46
+        width: 250
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc7391285d516a2e0800000000000000
+      internalID: -2114978968248961077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_2
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 46
+        width: 246
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb9f4dfdfe531300800000000000000
+      internalID: 221625251640875972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 80
+        width: 196
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3390ea75ece56c4e0800000000000000
+      internalID: -1961776347345974989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1720
+        y: 66
+        width: 177
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc2073264f01a1f20800000000000000
+      internalID: 3394043910982927051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_5
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 66
+        width: 188
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd3874ac87cb449c0800000000000000
+      internalID: -3943820146693930017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_6
+      rect:
+        serializedVersion: 2
+        x: 2521
+        y: 57
+        width: 212
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd1a5357e0ac94730800000000000000
+      internalID: 3983937508830716381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_7
+      rect:
+        serializedVersion: 2
+        x: 2928
+        y: 49
+        width: 216
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 722a61147773ef5d0800000000000000
+      internalID: -3026920914213756377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_8
+      rect:
+        serializedVersion: 2
+        x: 3310
+        y: 50
+        width: 274
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ff97e236da967ef0800000000000000
+      internalID: -110730896056279056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_9
+      rect:
+        serializedVersion: 2
+        x: 3713
+        y: 49
+        width: 287
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7921e5d3ba9379e90800000000000000
+      internalID: -7019078086601862505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_10
+      rect:
+        serializedVersion: 2
+        x: 4095
+        y: 52
+        width: 291
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f28d57431fcdbc1e0800000000000000
+      internalID: -2176403066378135505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Heavy Attack_11
+      rect:
+        serializedVersion: 2
+        x: 4508
+        y: 48
+        width: 247
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f294d1b2cffdde7b0800000000000000
+      internalID: -5193248521140221649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Accomplice Heavy Attack_0: -1950121320033508226
+      Accomplice Heavy Attack_1: -2114978968248961077
+      Accomplice Heavy Attack_10: -2176403066378135505
+      Accomplice Heavy Attack_11: -5193248521140221649
+      Accomplice Heavy Attack_2: 221625251640875972
+      Accomplice Heavy Attack_3: -1961776347345974989
+      Accomplice Heavy Attack_4: 3394043910982927051
+      Accomplice Heavy Attack_5: -3943820146693930017
+      Accomplice Heavy Attack_6: 3983937508830716381
+      Accomplice Heavy Attack_7: -3026920914213756377
+      Accomplice Heavy Attack_8: -110730896056279056
+      Accomplice Heavy Attack_9: -7019078086601862505
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

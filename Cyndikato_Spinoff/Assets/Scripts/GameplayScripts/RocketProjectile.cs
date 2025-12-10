@@ -6,7 +6,11 @@ public class RocketProjectile : MonoBehaviour
     public float speed = 18f;
     public float lifetime = 3f;
     public float knockbackForce = 12f;
-    public bool destroyOnHit = true;
+    public bool destroyOnHit = false;
+    [Header("Knockback Tuning")]
+    public float horizontalPushMultiplier = 1.0f; // >1 to push further horizontally
+    public float verticalLift = 2.0f;             // slight lift to break friction
+    public float hitstunSeconds = 0.35f;          // longer lock to ensure slide/fall
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -112,11 +116,13 @@ public class RocketProjectile : MonoBehaviour
             var targetRb = col.attachedRigidbody != null ? col.attachedRigidbody : col.GetComponentInParent<Rigidbody2D>();
             if (targetRb != null)
             {
-                // Apply horizontal knockback with slight upward push
-                Vector2 knock = new Vector2(dir * knockbackForce, knockbackForce * 0.5f);
+                // Strong horizontal push; small vertical lift to break platform contact
+                float h = dir * knockbackForce * horizontalPushMultiplier;
+                float v = verticalLift;
+                Vector2 knock = new Vector2(h, v);
                 targetRb.linearVelocity = knock;
-                targetPlayer.knockbackLockTimer = 0.2f;
-                var anim = targetPlayer.GetAnimator();
+                targetPlayer.knockbackLockTimer = hitstunSeconds;
+                var anim = targetPlayer.GetComponent<Animator>();
                 if (anim != null) anim.SetBool("IsHit", true);
             }
 

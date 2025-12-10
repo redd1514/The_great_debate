@@ -1,0 +1,780 @@
+fileFormatVersion: 2
+guid: d99bf3d93a9b9be429cb0aa1f767dd60
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 562979060294399133
+    second: Accomplice Forward Light Attack_0
+  - first:
+      213: -8701199302025850100
+    second: Accomplice Forward Light Attack_1
+  - first:
+      213: -1570040097751649523
+    second: Accomplice Forward Light Attack_2
+  - first:
+      213: 2916527254753349634
+    second: Accomplice Forward Light Attack_3
+  - first:
+      213: 4614576921818542731
+    second: Accomplice Forward Light Attack_4
+  - first:
+      213: -6884500431534434351
+    second: Accomplice Forward Light Attack_5
+  - first:
+      213: -7802154972482225432
+    second: Accomplice Forward Light Attack_6
+  - first:
+      213: 3686004590093765379
+    second: Accomplice Forward Light Attack_7
+  - first:
+      213: 6772471750060050125
+    second: Accomplice Forward Light Attack_8
+  - first:
+      213: -2593401570205224246
+    second: Accomplice Forward Light Attack_9
+  - first:
+      213: 7452217883204814549
+    second: Accomplice Forward Light Attack_10
+  - first:
+      213: -3279788160010885324
+    second: Accomplice Forward Light Attack_11
+  - first:
+      213: -6794446440919628684
+    second: Accomplice Forward Light Attack_12
+  - first:
+      213: 777830070344745312
+    second: Accomplice Forward Light Attack_13
+  - first:
+      213: -8718758001345956167
+    second: Accomplice Forward Light Attack_14
+  - first:
+      213: 5426967644476381022
+    second: Accomplice Forward Light Attack_15
+  - first:
+      213: -4557365913981415025
+    second: Accomplice Forward Light Attack_16
+  - first:
+      213: 5470484458672664128
+    second: Accomplice Forward Light Attack_17
+  - first:
+      213: -4251167708056806618
+    second: Accomplice Forward Light Attack_18
+  - first:
+      213: -8299385034834514550
+    second: Accomplice Forward Light Attack_19
+  - first:
+      213: 4181502493353519815
+    second: Accomplice Forward Light Attack_20
+  - first:
+      213: 8969204520301714799
+    second: Accomplice Forward Light Attack_21
+  - first:
+      213: -4199979950418661828
+    second: Accomplice Forward Light Attack_22
+  - first:
+      213: 1504746729043521679
+    second: Accomplice Forward Light Attack_23
+  - first:
+      213: 524511987383271127
+    second: Accomplice Forward Light Attack_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 53
+        width: 317
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d94b4d8f87a10d700800000000000000
+      internalID: 562979060294399133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_1
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 79
+        width: 298
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c035fd2f5512f3780800000000000000
+      internalID: -8701199302025850100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_2
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 49
+        width: 326
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03b46a79d8163ae0800000000000000
+      internalID: -1570040097751649523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1253
+        y: 43
+        width: 312
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2009155f516997820800000000000000
+      internalID: 2916527254753349634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 41
+        width: 62
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b82b5b5e2454a0040800000000000000
+      internalID: 4614576921818542731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_5
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 49
+        width: 269
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d7dd5a45575570a0800000000000000
+      internalID: -6884500431534434351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_6
+      rect:
+        serializedVersion: 2
+        x: 2063
+        y: 49
+        width: 269
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ea36aed36d29b390800000000000000
+      internalID: -7802154972482225432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_7
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 49
+        width: 269
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b8ff835a1572330800000000000000
+      internalID: 3686004590093765379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_8
+      rect:
+        serializedVersion: 2
+        x: 2890
+        y: 49
+        width: 269
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc682b1bc27acfd50800000000000000
+      internalID: 6772471750060050125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_9
+      rect:
+        serializedVersion: 2
+        x: 3258
+        y: 56
+        width: 263
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac23af72303620cd0800000000000000
+      internalID: -2593401570205224246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_10
+      rect:
+        serializedVersion: 2
+        x: 3669
+        y: 56
+        width: 263
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d68c356ea89b6760800000000000000
+      internalID: 7452217883204814549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_11
+      rect:
+        serializedVersion: 2
+        x: 4081
+        y: 56
+        width: 263
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 437e408ab0adb72d0800000000000000
+      internalID: -3279788160010885324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_12
+      rect:
+        serializedVersion: 2
+        x: 4457
+        y: 49
+        width: 237
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4748193e5f645b1a0800000000000000
+      internalID: -6794446440919628684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_13
+      rect:
+        serializedVersion: 2
+        x: 4871
+        y: 49
+        width: 237
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 061048ee3586bca00800000000000000
+      internalID: 777830070344745312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_14
+      rect:
+        serializedVersion: 2
+        x: 5242
+        y: 51
+        width: 355
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6fd2faacfb00780800000000000000
+      internalID: -8718758001345956167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_15
+      rect:
+        serializedVersion: 2
+        x: 5642
+        y: 51
+        width: 355
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e579d80c156705b40800000000000000
+      internalID: 5426967644476381022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_16
+      rect:
+        serializedVersion: 2
+        x: 6046
+        y: 51
+        width: 355
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f811aa1e8dbf0c0c0800000000000000
+      internalID: -4557365913981415025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_17
+      rect:
+        serializedVersion: 2
+        x: 6445
+        y: 51
+        width: 355
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04eaa7c91a01beb40800000000000000
+      internalID: 5470484458672664128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_18
+      rect:
+        serializedVersion: 2
+        x: 6840
+        y: 51
+        width: 355
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62b99a04e71d005c0800000000000000
+      internalID: -4251167708056806618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_19
+      rect:
+        serializedVersion: 2
+        x: 7236
+        y: 49
+        width: 356
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8dee786849a2dc80800000000000000
+      internalID: -8299385034834514550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_20
+      rect:
+        serializedVersion: 2
+        x: 7642
+        y: 49
+        width: 332
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ca2fb7fc5ea70a30800000000000000
+      internalID: 4181502493353519815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_21
+      rect:
+        serializedVersion: 2
+        x: 8056
+        y: 44
+        width: 288
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d59668df3097c70800000000000000
+      internalID: 8969204520301714799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_22
+      rect:
+        serializedVersion: 2
+        x: 8450
+        y: 50
+        width: 244
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e688fcc7ca6b5c0800000000000000
+      internalID: -4199979950418661828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_23
+      rect:
+        serializedVersion: 2
+        x: 8866
+        y: 49
+        width: 227
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80f1957d2fe1e410800000000000000
+      internalID: 1504746729043521679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Accomplice Forward Light Attack_24
+      rect:
+        serializedVersion: 2
+        x: 9234
+        y: 53
+        width: 291
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7def960afd0774700800000000000000
+      internalID: 524511987383271127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Accomplice Forward Light Attack_0: 562979060294399133
+      Accomplice Forward Light Attack_1: -8701199302025850100
+      Accomplice Forward Light Attack_10: 7452217883204814549
+      Accomplice Forward Light Attack_11: -3279788160010885324
+      Accomplice Forward Light Attack_12: -6794446440919628684
+      Accomplice Forward Light Attack_13: 777830070344745312
+      Accomplice Forward Light Attack_14: -8718758001345956167
+      Accomplice Forward Light Attack_15: 5426967644476381022
+      Accomplice Forward Light Attack_16: -4557365913981415025
+      Accomplice Forward Light Attack_17: 5470484458672664128
+      Accomplice Forward Light Attack_18: -4251167708056806618
+      Accomplice Forward Light Attack_19: -8299385034834514550
+      Accomplice Forward Light Attack_2: -1570040097751649523
+      Accomplice Forward Light Attack_20: 4181502493353519815
+      Accomplice Forward Light Attack_21: 8969204520301714799
+      Accomplice Forward Light Attack_22: -4199979950418661828
+      Accomplice Forward Light Attack_23: 1504746729043521679
+      Accomplice Forward Light Attack_24: 524511987383271127
+      Accomplice Forward Light Attack_3: 2916527254753349634
+      Accomplice Forward Light Attack_4: 4614576921818542731
+      Accomplice Forward Light Attack_5: -6884500431534434351
+      Accomplice Forward Light Attack_6: -7802154972482225432
+      Accomplice Forward Light Attack_7: 3686004590093765379
+      Accomplice Forward Light Attack_8: 6772471750060050125
+      Accomplice Forward Light Attack_9: -2593401570205224246
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

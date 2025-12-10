@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectData
   characterName: Cyndi
   characterDescription: 
-  characterIcon: {fileID: -5521333569484247171, guid: 5e40c7f7b12e7354592b6e27a2c8556b, type: 3}
+  characterIcon: {fileID: 4343985191607484958, guid: 91bde5eed5321714c86c82374c007f86, type: 3}
   characterFullArt: {fileID: -3856072011681961445, guid: 0a36d42233c661b418f28daf40a24a58, type: 3}
   idleAnimationFrames:
   - {fileID: 8323439144207953694, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
@@ -26,9 +26,6 @@ MonoBehaviour:
   - {fileID: -3058875594957820937, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
   - {fileID: 8136966684183868099, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
   - {fileID: 6338253673169550806, guid: 662ff2e2697b8cd4f9ba5a7ac6061b11, type: 3}
-  animationSpeed: 0.3
+  animationSpeed: 0.5
   loopAnimation: 1
-  characterPrefab: {fileID: 0}
-  health: 100
-  speed: 5
-  attack: 10
+  characterPrefab: {fileID: 6348566150702923270, guid: 978e4e7302cf6614191af865f5080cf0, type: 3}

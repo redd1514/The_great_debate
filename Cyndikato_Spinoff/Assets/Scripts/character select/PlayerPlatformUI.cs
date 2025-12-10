@@ -77,11 +77,11 @@ public class PlayerPlatformUI : MonoBehaviour
         {
             if (playerIndex == 0)
             {
-                statusText.text = "Keyboard Player\n(Auto-Joined)";
+                statusText.text = "";
             }
             else
             {
-                statusText.text = $"Press any button on\nController {playerIndex} to join";
+                statusText.text = "";
             }
         }
     }
@@ -182,25 +182,6 @@ public class PlayerPlatformUI : MonoBehaviour
             }
         }
 
-        if (statusText)
-        {
-            if (isActivePlayer)
-            {
-                if (!string.IsNullOrEmpty(inputDeviceName))
-                {
-                    string controls = inputDeviceName == "Keyboard" ? "Enter/Space to lock" : "A/Start to lock";
-                    statusText.text = $"Controlling\n{controls}";
-                }
-                else
-                {
-                    statusText.text = "Controlling\nPress action to lock";
-                }
-            }
-            else
-            {
-                statusText.text = "Selecting...";
-            }
-        }
     }
 
     void ShowLockedCharacter(CharacterSelectData character)

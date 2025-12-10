@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: fbe33111d23a5414cb6a61fcfc6965b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3175856295288234192
+    second: Cyndi Heavy attack_0
+  - first:
+      213: 9078990013369504561
+    second: Cyndi Heavy attack_1
+  - first:
+      213: -2226917484339271007
+    second: Cyndi Heavy attack_2
+  - first:
+      213: -500577004381113015
+    second: Cyndi Heavy attack_3
+  - first:
+      213: -3353331904679256994
+    second: Cyndi Heavy attack_4
+  - first:
+      213: -1834898350919588674
+    second: Cyndi Heavy attack_5
+  - first:
+      213: -5634257379580229236
+    second: Cyndi Heavy attack_6
+  - first:
+      213: -8859217377632203675
+    second: Cyndi Heavy attack_7
+  - first:
+      213: 2567206865315663534
+    second: Cyndi Heavy attack_8
+  - first:
+      213: -6158679972693956767
+    second: Cyndi Heavy attack_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 49
+        width: 272
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d0e7526978e21c20800000000000000
+      internalID: 3175856295288234192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_1
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 44
+        width: 252
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 133553a805d0ffd70800000000000000
+      internalID: 9078990013369504561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_2
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 39
+        width: 252
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aae9d1c8566811e0800000000000000
+      internalID: -2226917484339271007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_3
+      rect:
+        serializedVersion: 2
+        x: 1277
+        y: 99
+        width: 195
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 945722fddd79d09f0800000000000000
+      internalID: -500577004381113015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_4
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 87
+        width: 176
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5cdb9f36629671d0800000000000000
+      internalID: -3353331904679256994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_5
+      rect:
+        serializedVersion: 2
+        x: 2081
+        y: 87
+        width: 190
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4ec7aeba12986e0800000000000000
+      internalID: -1834898350919588674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_6
+      rect:
+        serializedVersion: 2
+        x: 2479
+        y: 73
+        width: 213
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c894ffcc3c81fc1b0800000000000000
+      internalID: -5634257379580229236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_7
+      rect:
+        serializedVersion: 2
+        x: 2886
+        y: 62
+        width: 214
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56cc342bbbcbd0580800000000000000
+      internalID: -8859217377632203675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_8
+      rect:
+        serializedVersion: 2
+        x: 3268
+        y: 57
+        width: 272
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eae8518da0d80a320800000000000000
+      internalID: 2567206865315663534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyndi Heavy attack_9
+      rect:
+        serializedVersion: 2
+        x: 3671
+        y: 55
+        width: 284
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 167a346e139f78aa0800000000000000
+      internalID: -6158679972693956767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Cyndi Heavy attack_0: 3175856295288234192
+      Cyndi Heavy attack_1: 9078990013369504561
+      Cyndi Heavy attack_2: -2226917484339271007
+      Cyndi Heavy attack_3: -500577004381113015
+      Cyndi Heavy attack_4: -3353331904679256994
+      Cyndi Heavy attack_5: -1834898350919588674
+      Cyndi Heavy attack_6: -5634257379580229236
+      Cyndi Heavy attack_7: -8859217377632203675
+      Cyndi Heavy attack_8: 2567206865315663534
+      Cyndi Heavy attack_9: -6158679972693956767
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
